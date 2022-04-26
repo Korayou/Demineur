@@ -22,25 +22,22 @@ public class FrameMenu{
 		
 		// Découpage de la fenêtre pour la mise en place du damier 
 	    Dimension damierSize = fenetre.getSize();
-		Dimension caseSize = new Dimension(damierSize.width/75, damierSize.height/75);
-	    GridLayout damier = new GridLayout(caseSize.height, caseSize.width);
+		Dimension gridSize = new Dimension(damierSize.width/75, damierSize.height/75);
+	    GridLayout damier = new GridLayout(gridSize.height, gridSize.width);
 		fenetre.setLayout(damier);
-		System.out.println(" Menu " + damierSize.width +"  "+ damierSize.height + "  "+caseSize.width +"  "+ caseSize.height );
+		System.out.println(" Menu " + damierSize.width +"  "+ damierSize.height + "  "+gridSize.width +"  "+ gridSize.height );
 
 		// Création des couleurs
 		Color gray1 = new Color(80,80,80);
 		Color gray2 = new Color(70,70,70);
 
 		// Réalisation du damier et ajout d'éléments graphiques
-		for (int line=0; line<caseSize.height; line++){
-			for(int cases = 0; cases < caseSize.width; cases++){
+		for (int line=0; line<gridSize.height; line++){
+			for(int cases = 0; cases < gridSize.width; cases++){
 				if (line%2==0){
 	  				if (cases%2==0){
 	  					JPanel dark = new JPanel();
 		    			dark.setBackground(gray2);
-						if ((line==0)&&(cases==8)){
-							System.out.println("ok");
-						}
 	  					fenetre.add(dark);
 	  				} else {
 	  					JPanel light = new JPanel();
