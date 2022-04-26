@@ -17,41 +17,53 @@ public class FrameMenu{
 	    fenetre.setLocation(frameLocation[0],frameLocation[1]);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// On créer un damier aux couleurs du démineur pour le fond
+
+		// On créer un damier aux couleurs du démineur pour le fond ainsi que des décors
+		
+		// Découpage de la fenêtre pour la mise en place du damier 
 	    Dimension damierSize = fenetre.getSize();
-		int damierWidth = damierSize.width/75;
-		int damierHeight = damierSize.height/75;
-	    GridLayout damier = new GridLayout(damierHeight, damierWidth);
+		Dimension caseSize = new Dimension(damierSize.width/75, damierSize.height/75);
+	    GridLayout damier = new GridLayout(caseSize.height, caseSize.width);
 		fenetre.setLayout(damier);
-		Color lightGreen = new Color(80,215,100);
-		Color darkGreen = new Color(70,200,90);
-		for (int line=0; line<damierHeight; line++){
-			for(int cases = 0; cases < damierWidth; cases++){
+
+		// Création des couleurs
+		Color gray1 = new Color(80,80,80);
+		Color gray2 = new Color(60,60,60);
+
+		// Réalisation du damier et ajout d'éléments graphiques
+		Etoile etoile = new Etoile();
+		etoile.setPreferredSize(caseSize);
+		for (int line=0; line<caseSize.height; line++){
+			for(int cases = 0; cases < caseSize.width; cases++){
 				if (line%2==0){
 	  				if (cases%2==0){
 	  					JPanel dark = new JPanel();
-		    			dark.setBackground(darkGreen);
+		    			dark.setBackground(gray2);
+						if ((line==0)&&(cases==8)){
+							dark.add(etoile);
+							System.out.println("ok");
+						}
 	  					fenetre.add(dark);
 	  				} else {
 	  					JPanel light = new JPanel();
-		    			light.setBackground(lightGreen);
+		    			light.setBackground(gray1);
 	  					fenetre.add(light);
 	  				}
 	  			} else {
 	  				if (cases%2==0){
 	  					JPanel light = new JPanel();
-		    			light.setBackground(lightGreen);
+		    			light.setBackground(gray1);
 	  					fenetre.add(light);
 	  				} else {
 	  					JPanel dark = new JPanel();
-		    			dark.setBackground(darkGreen);
+		    			dark.setBackground(gray2);
 	  					fenetre.add(dark);	
 	  				}			
 				}
 	  		}
   		}
 
-		// A faire : choix de la taille de la grille, bouton jouer et quitter
+		// A faire : choix de la taille de la grille, bouton jouer et quitter, déscription/règles du jeu, décorations
 
 	    fenetre.setVisible(true);
 	}
