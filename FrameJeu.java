@@ -2,67 +2,70 @@ import javax.swing.*;
 import java.awt.*;
 
 // Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
-public class FrameMenu{
-	public FrameMenu() {
+public class FrameJeu{
+	public FrameJeu(int lignes, int colonnes) {
 
-		// On récupère les dimensions de l'écran pour adapter la taille de notre fenêtre
+		// On récupère les dimensions de l'écran pour adapter la taille par défaut de notre fenêtre
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int frameWidth = screenSize.width * 2/3;
 		int frameHeight = screenSize.height * 2/3;
 		int frameLocation[]={screenSize.width * 1/6, screenSize.height * 1/6};
 
 		// On crée ensuite notre fenêtre
-		JFrame fenetre = new JFrame("Démineur - Menu");
-	    fenetre.setSize(frameWidth,frameHeight);
+		JFrame fenetre = new JFrame("Démineur - En Jeu");
+		fenetre.setSize(frameWidth,frameHeight);
 	    fenetre.setLocation(frameLocation[0],frameLocation[1]);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-		// On créer un damier aux couleurs du démineur pour le fond ainsi que des décors
+		// On créer La grille de jeu
 		
-		// Découpage de la fenêtre pour la mise en place du damier 
+		// Découpage de la fenêtre en fonction des paramètres pour la mise en place du damier
 	    Dimension damierSize = fenetre.getSize();
-		Dimension caseSize = new Dimension(damierSize.width/75, damierSize.height/75);
-	    GridLayout damier = new GridLayout(caseSize.height, caseSize.width);
+		Dimension caseSize = new Dimension(frameWidth/colonnes,frameWidth/colonnes);
+	    GridLayout damier = new GridLayout(lignes,colonnes);
 		fenetre.setLayout(damier);
-		System.out.println(" Menu " + damierSize.width +"  "+ damierSize.height + "  "+caseSize.width +"  "+ caseSize.height );
+		System.out.println(" Jeu " + damierSize.width +"  "+ damierSize.height + "  "+caseSize.width +"  "+ caseSize.height );
 
 		// Création des couleurs
 		Color gray1 = new Color(80,80,80);
 		Color gray2 = new Color(70,70,70);
 
 		// Réalisation du damier et ajout d'éléments graphiques
-		for (int line=0; line<caseSize.height; line++){
-			for(int cases = 0; cases < caseSize.width; cases++){
-				if (line%2==0){
-	  				if (cases%2==0){
+		for (int currentLine=0; currentLine<lignes; currentLine++){
+			for(int currentCase = 0; currentCase < colonnes; currentCase++){
+				if (currentLine%2==0){
+	  				if (currentCase%2==0){
 	  					JPanel dark = new JPanel();
+	  					dark.setPreferredSize(caseSize);
 		    			dark.setBackground(gray2);
-						if ((line==0)&&(cases==8)){
+						if ((currentLine==0)&&(currentCase==8)){
 							System.out.println("ok");
 						}
 	  					fenetre.add(dark);
 	  				} else {
 	  					JPanel light = new JPanel();
+	  					light.setPreferredSize(caseSize);
 		    			light.setBackground(gray1);
 	  					fenetre.add(light);
 	  				}
 	  			} else {
-	  				if (cases%2==0){
+	  				if (currentCase%2==0){
 	  					JPanel light = new JPanel();
+	  					light.setPreferredSize(caseSize);
 		    			light.setBackground(gray1);
 	  					fenetre.add(light);
 	  				} else {
 	  					JPanel dark = new JPanel();
+	  					dark.setPreferredSize(caseSize);
 		    			dark.setBackground(gray2);
 	  					fenetre.add(dark);	
 	  				}			
 				}
 	  		}
   		}
-
-		// A faire : choix de la taille de la grille, bouton jouer, charger et quitter, déscription/règles du jeu
-
+  		fenetre.pack();
+  		System.out.println(" Jeu " + fenetre.getSize() + "  "+caseSize.width +"  "+ caseSize.height );
 	    fenetre.setVisible(true);
 	}
 }
