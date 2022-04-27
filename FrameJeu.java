@@ -37,9 +37,9 @@ public class FrameJeu{
 
 		System.out.println("Taille bannière : "+banniereSize);
 		System.out.println("Taille grille : "+grilleSize);
+		System.out.println("Taille écran : "+screenSize);
 		
 		fenetre.setLayout(null);  
-  		fenetre.pack();
 	    fenetre.setVisible(true);
 	}
 }
