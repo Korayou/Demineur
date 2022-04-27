@@ -10,9 +10,10 @@ public class Grille extends JComponent {
 		
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    this.grilleSize = new Dimension(screenSize.width*2/3, screenSize.height*5/9);
+	    this.grilleSize = new Dimension(screenSize.width*2/3, ((screenSize.width*2/3)/colonnes)*lignes );
 		Dimension caseSize = new Dimension(this.grilleSize.width/colonnes,this.grilleSize.width/colonnes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
+        System.out.println("Taille des cases : "+caseSize+"Taille de la Grille : "+grilleSize);
 		this.grille.setLayout(damier);
         this.grille.setSize(grilleSize);
 

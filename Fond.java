@@ -4,7 +4,7 @@ import java.awt.*;
 public class Fond {
     public Fond(JFrame fenetre) {
     	
-        // On créer un damier aux couleurs du démineur pour le fond ainsi que des décors
+        // On créer un damier aux couleurs du démineur pour le fond
 		
 		// Découpage de la fenêtre pour la mise en place du damier 
 	    Dimension damierSize = fenetre.getSize();

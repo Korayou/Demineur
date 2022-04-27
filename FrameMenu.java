@@ -23,7 +23,6 @@ public class FrameMenu{
 
 
 		// A faire : choix de la taille de la grille, bouton jouer, charger et quitter, déscription/règles du jeu
-
 	    fenetre.setVisible(true);
 	}
 }
