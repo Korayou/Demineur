@@ -19,6 +19,7 @@ public class FrameMenu{
 
 		// On crée un objet Fond pour habiller notre fenêtre
 		new Fond(fenetre);
+		
 
 
 		// A faire : choix de la taille de la grille, bouton jouer, charger et quitter, déscription/règles du jeu
