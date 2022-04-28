@@ -12,17 +12,11 @@ public class FrameJeu{
 		JFrame fenetre = new JFrame("Démineur - En Jeu");
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-
-
-		
-
-		// En test
-		
 		// Couleurs
 		//Color rose = new Color(236,0,140);
 		Color vert = new Color(0, 236, 96);
 
-		//Essai de mise en page car la bannière est par dessus la grille
+		//	Mise en page
 		fenetre.setLayout(new GridBagLayout());
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
@@ -34,7 +28,7 @@ public class FrameJeu{
 		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/10);
 		banniere.setSize(banniereSize);
 
-		// mise en place de la bannière
+		//	Mise en place de la bannière
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;
@@ -44,7 +38,6 @@ public class FrameJeu{
 
 	
 		// 	Mise en place de la grille
-		//miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 1;
 		miseEnPage.weightx =1;
@@ -52,7 +45,7 @@ public class FrameJeu{
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		fenetre.add(grille.getGrille(), miseEnPage);
 
-
+		// Mise en place de la fenêtre et affichage
 		fenetre.pack();
 		fenetre.setSize(grilleSize.width,grilleSize.height*11/10);
 		Dimension fenetreSize=fenetre.getSize();
