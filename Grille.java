@@ -40,9 +40,6 @@ public class Grille extends JComponent {
 				}
 			}
 		}
-		for (int i=0;i<mines;i++){
-		System.out.println(""+caseMine[i]);
-		}
 
 		//	Comme pour savoir si une case est visible, mais pour quand elle est minée
 		boolean[] minee = new boolean[lignes*colonnes];
@@ -54,9 +51,48 @@ public class Grille extends JComponent {
 			}
 		}
 
+		//	Connaître le nombre de mines autour de la case
+		int[] entourage = new int[lignes*colonnes];
+		for (int i=0;i<lignes*colonnes;i++){
+			for (int j=0;j<mines;j++){
+				// Si une mine est à droite
+				if (caseMine[j]==i+1){
+					entourage[i]+=1;
+				}
+				// Si une mine est à gauche
+				if (caseMine[j]==i-1){
+					entourage[i]+=1;
+				}
+				// Si une mine est au dessus
+				if (caseMine[j]==i-colonnes){
+					entourage[i]+=1;
+				}
+				// Si une mine est au dessus à droite
+				if (caseMine[j]==i-colonnes+1){
+					entourage[i]+=1;
+				}
+				// Si une mine est au dessus à gauche
+				if (caseMine[j]==i-colonnes-1){
+					entourage[i]+=1;
+				}
+				// Si une mine est en dessous
+				if (caseMine[j]==i+colonnes){
+					entourage[i]+=1;
+				}
+				// Si une mine est en dessous à droite
+				if (caseMine[j]==i+colonnes+1){
+					entourage[i]+=1;
+				}
+				// Si une mine est en dessous à gauche
+				if (caseMine[j]==i+colonnes-1){
+					entourage[i]+=1;
+				}
+			}
+		}
+		
 		// Affichage des cases
 		for (int i=0;i<lignes*colonnes;i++){
-			Case panel = new Case(caseSize,visible[i], minee[i]);
+			Case panel = new Case(caseSize,visible[i],minee[i],entourage[i]);
 			this.grille.add(panel.getCase());
   		}
     }
