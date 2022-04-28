@@ -10,36 +10,33 @@ public class FrameJeu{
 
 		// On crée ensuite notre fenêtre avec des valeurs par défaut
 		JFrame fenetre = new JFrame("Démineur - En Jeu");
-		fenetre.setSize(screenSize.width * 2/3,screenSize.height * 2/3);
-	    fenetre.setLocation(screenSize.width * 1/6, screenSize.height * 1/6);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
 
+		
 
 		// En test
 
 		Color rose = new Color(236,0,140);
+		Color vert = new Color(0, 236, 96);
 
 		Dimension grilleSize= grille.getGrilleSize();
 		JPanel banniere= new JPanel();
-		banniere.setBackground(rose);
-		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/9);
+		banniere.setBackground(vert);
+		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/10);
 		banniere.setSize(banniereSize);
 
-		banniere.setBounds( 0,  0, banniereSize.width, banniereSize.height);
+		//banniere.setBounds( 0,  0, banniereSize.width, banniereSize.height);
 		JPanel plateau=grille.getGrille();
-		plateau.setBounds( 0,  banniereSize.height, grilleSize.width,grilleSize.height);
+		//plateau.setBounds( 0,  banniereSize.height, grilleSize.width,grilleSize.height);
 		
 		fenetre.add(banniere);
 		fenetre.add(plateau);
-	
-
-		System.out.println("Taille bannière : "+banniereSize);
-		System.out.println("Taille grille : "+grilleSize);
-		System.out.println("Taille écran : "+screenSize);
-		
-		fenetre.setLayout(null);  
+		fenetre.pack();
+		Dimension fenetreSize=fenetre.getSize();
+		fenetre.setLocation(screenSize.width/2-(fenetreSize.width/2), screenSize.height/2-(fenetreSize.height/2));
+		//fenetre.setLayout(null);  
 	    fenetre.setVisible(true);
 	}
 }
