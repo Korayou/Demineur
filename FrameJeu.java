@@ -12,8 +12,7 @@ public class FrameJeu{
 		JFrame fenetre = new JFrame("Démineur - En Jeu");
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// Couleurs
-		//Color rose = new Color(236,0,140);
+		// Couleur
 		Color vert = new Color(0, 236, 96);
 
 		//	Mise en page
@@ -25,7 +24,7 @@ public class FrameJeu{
 		Dimension grilleSize= grille.getGrilleSize();
 		JPanel banniere= new JPanel();
 		banniere.setBackground(vert);
-		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/10);
+		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/8);
 		banniere.setSize(banniereSize);
 
 		//	Mise en place de la bannière
@@ -33,7 +32,7 @@ public class FrameJeu{
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;
 		miseEnPage.weightx =1;
-		miseEnPage.weighty  = 0.1;
+		miseEnPage.weighty  = 0.15;
 		fenetre.add(banniere, miseEnPage);
 
 	
@@ -41,13 +40,13 @@ public class FrameJeu{
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 1;
 		miseEnPage.weightx =1;
-		miseEnPage.weighty  = 0.9;
+		miseEnPage.weighty  = 0.85;
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		fenetre.add(grille.getGrille(), miseEnPage);
 
 		// Mise en place de la fenêtre et affichage
 		fenetre.pack();
-		fenetre.setSize(grilleSize.width,grilleSize.height*11/10);
+		fenetre.setSize(grilleSize.width,grilleSize.height*9/8);
 		Dimension fenetreSize=fenetre.getSize();
 		fenetre.setLocation(screenSize.width/2-(fenetreSize.width/2), screenSize.height/2-(fenetreSize.height/2));
 		//fenetre.setResizable(false);
