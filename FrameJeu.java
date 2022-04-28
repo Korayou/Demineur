@@ -31,30 +31,30 @@ public class FrameJeu{
 		Dimension grilleSize= grille.getGrilleSize();
 		JPanel banniere= new JPanel();
 		banniere.setBackground(vert);
-		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/9);
+		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/10);
 		banniere.setSize(banniereSize);
 
 		// mise en place de la bannière
-		miseEnPage.fill = GridBagConstraints.HORIZONTAL;
+		miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;
-		miseEnPage.weightx =banniereSize.width;
-		miseEnPage.ipady  = banniereSize.height;
+		miseEnPage.weightx =1;
+		miseEnPage.weighty  = 0.1;
 		fenetre.add(banniere, miseEnPage);
 
 	
 		// 	Mise en place de la grille
 		//miseEnPage.fill = GridBagConstraints.BOTH;
-		miseEnPage.anchor = GridBagConstraints.SOUTHEAST;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 1;
-		miseEnPage.weightx =grilleSize.width;
-		miseEnPage.ipady  = grilleSize.height;
+		miseEnPage.weightx =1;
+		miseEnPage.weighty  = 0.9;
+		miseEnPage.fill = GridBagConstraints.BOTH;
 		fenetre.add(grille.getGrille(), miseEnPage);
 
 
 		fenetre.pack();
-		fenetre.setSize(grilleSize.width,grilleSize.height*10/9);
+		fenetre.setSize(grilleSize.width,grilleSize.height*11/10);
 		Dimension fenetreSize=fenetre.getSize();
 		fenetre.setLocation(screenSize.width/2-(fenetreSize.width/2), screenSize.height/2-(fenetreSize.height/2));
 		//fenetre.setResizable(false);
