@@ -17,26 +17,47 @@ public class FrameJeu{
 		
 
 		// En test
-
-		Color rose = new Color(236,0,140);
+		
+		// Couleurs
+		//Color rose = new Color(236,0,140);
 		Color vert = new Color(0, 236, 96);
 
+		//Essai de mise en page car la bannière est par dessus la grille
+		fenetre.setLayout(new GridBagLayout());
+		GridBagConstraints miseEnPage = new GridBagConstraints();
+
+
+		// Création de la bannière (qui sera dans une autre classe)
 		Dimension grilleSize= grille.getGrilleSize();
 		JPanel banniere= new JPanel();
 		banniere.setBackground(vert);
-		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/10);
+		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/9);
 		banniere.setSize(banniereSize);
 
-		//banniere.setBounds( 0,  0, banniereSize.width, banniereSize.height);
-		JPanel plateau=grille.getGrille();
-		//plateau.setBounds( 0,  banniereSize.height, grilleSize.width,grilleSize.height);
-		
-		fenetre.add(banniere);
-		fenetre.add(plateau);
+		// mise en place de la bannière
+		miseEnPage.fill = GridBagConstraints.HORIZONTAL;
+		miseEnPage.gridx = 0;
+    	miseEnPage.gridy = 0;
+		miseEnPage.weightx =banniereSize.width;
+		miseEnPage.ipady  = banniereSize.height;
+		fenetre.add(banniere, miseEnPage);
+
+	
+		// 	Mise en place de la grille
+		//miseEnPage.fill = GridBagConstraints.BOTH;
+		miseEnPage.anchor = GridBagConstraints.SOUTHEAST;
+		miseEnPage.gridx = 0;
+    	miseEnPage.gridy = 1;
+		miseEnPage.weightx =grilleSize.width;
+		miseEnPage.ipady  = grilleSize.height;
+		fenetre.add(grille.getGrille(), miseEnPage);
+
+
 		fenetre.pack();
+		fenetre.setSize(grilleSize.width,grilleSize.height*10/9);
 		Dimension fenetreSize=fenetre.getSize();
 		fenetre.setLocation(screenSize.width/2-(fenetreSize.width/2), screenSize.height/2-(fenetreSize.height/2));
-		//fenetre.setLayout(null);  
+		//fenetre.setResizable(false);
 	    fenetre.setVisible(true);
 	}
 }
