@@ -6,7 +6,7 @@ public class Grille extends JComponent {
     private Dimension grilleSize=new Dimension(0,0);
     private JPanel grille= new JPanel();
 
-    // On créer La grille de jeu
+    // On crée La grille de jeu
     public Grille(int lignes, int colonnes, int mines){
 		
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
@@ -90,12 +90,16 @@ public class Grille extends JComponent {
 			}
 		}
 		
-		// Affichage des cases
-		for (int i=0;i<lignes*colonnes;i++){
+		AffichePlateau(lignes*colonnes, caseSize, entourage, visible, minee);
+    }
+
+	//	Méthode pour afficher l'état des cases
+	protected void AffichePlateau(int taille, Dimension caseSize, int[] entourage, boolean[] visible, boolean[] minee){
+		for (int i=0;i<taille;i++){
 			Case panel = new Case(caseSize,visible[i],minee[i],entourage[i]);
 			this.grille.add(panel.getCase());
   		}
-    }
+	}
 
 	//	Méthode pour obtenir la taille de la grille de jeu
     public Dimension getGrilleSize() {

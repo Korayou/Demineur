@@ -3,16 +3,19 @@ import java.awt.*;
 
 public class Case extends JComponent {
 	private JPanel panel = new JPanel();
-	private int entourage=0;
-	private boolean visible=false;
-	private boolean minee=false;
+	private int entourage;
+	private boolean visible;
+	private boolean minee;
 
 	public Case(Dimension caseSize, boolean visible, boolean minee, int entourage) {
 		super();
-		this.panel.setSize(caseSize);
 		this.entourage=entourage;
 		this.visible=visible;
 		this.minee=minee;
+		this.panel.setSize(caseSize);
+
+		GridLayout unique = new GridLayout(1,1);
+		this.panel.setLayout(unique);
 
 		if (this.visible == false) {
 			Color gray2 = new Color(70, 70, 70);
@@ -25,15 +28,11 @@ public class Case extends JComponent {
 				this.panel.setBackground(rose);
 			} else if (this.entourage>0){
 				System.out.println(""+ this.entourage);
+				this.panel.add(new Chiffre(entourage,caseSize));	
 			}
 		}
 
 	}
-
-	@Override
-  	protected void paintComponent(Graphics pinceau) {
-		System.out.println("coucou");
-  	}
 
 	public JPanel getCase() {
 		return this.panel;
