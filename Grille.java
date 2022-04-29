@@ -30,18 +30,25 @@ public class Grille extends JComponent {
 		//	Instalation des mines
 		//	Création d'un tableau de nombres aléatoires pour savoir où les placer
 		int[] caseMine = new int[mines];
-		Random mine = new Random();
+		Random rand = new Random();
+		//	On initialise les emplacements des mines
 		for (int i=0;i<mines;i++){
-			caseMine[i]=mine.nextInt(lignes*colonnes);
-			// On vérifie qu'on n'a pas miné une case déjà minée
-			for (int j=0;j<mines;j++){
-				if (caseMine[j]==caseMine[i]){
-					caseMine[i]=mine.nextInt(lignes*colonnes);
+			caseMine[i] = rand.nextInt(lignes*colonnes);
+			//	On vérifie que la case n'a pas déjà été minée, auquel cas on change de case
+			for (int j=0;j<i;j++){
+				if (caseMine[i]==caseMine[j]){
+					caseMine[i] = rand.nextInt(lignes*colonnes);
+					j=0;
 				}
 			}
 		}
 
-		//	Comme pour savoir si une case est visible, mais pour quand elle est minée
+		// Affichage console des emplacements des mines
+		for (int i=0;i<mines;i++){
+			System.out.println(""+caseMine[i]);
+		}
+
+		//	On place maintenant les mines sur la plateau
 		boolean[] minee = new boolean[lignes*colonnes];
 		for (int i=0; i<lignes*colonnes;i++){
 			for (int j=0;j<mines;j++){
