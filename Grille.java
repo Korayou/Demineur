@@ -42,12 +42,6 @@ public class Grille extends JComponent {
 				}
 			}
 		}
-
-		// Affichage console des emplacements des mines
-		for (int i=0;i<mines;i++){
-			System.out.println(""+caseMine[i]);
-		}
-
 		//	On place maintenant les mines sur la plateau
 		boolean[] minee = new boolean[lignes*colonnes];
 		for (int i=0; i<lignes*colonnes;i++){
@@ -61,42 +55,214 @@ public class Grille extends JComponent {
 		//	Connaître le nombre de mines autour de la case
 		int[] entourage = new int[lignes*colonnes];
 		for (int i=0;i<lignes*colonnes;i++){
-			for (int j=0;j<mines;j++){
-				// Si une mine est à droite
-				if (caseMine[j]==i+1){
-					entourage[i]+=1;
+			//	Gestion des coins
+			//	Coin supérieur droit 
+			if (i==colonnes-1){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à gauche
+					if (caseMine[j]==i+colonnes-1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est à gauche
-				if (caseMine[j]==i-1){
-					entourage[i]+=1;
+			}
+			//	Coin suppérieur gauche
+			else if (i==0){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à droite
+					if (caseMine[j]==i+colonnes+1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est au dessus
-				if (caseMine[j]==i-colonnes){
-					entourage[i]+=1;
+			}
+			//	Coin inférieur droit
+			else if (i==lignes*colonnes-1){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à gauche
+					if (caseMine[j]==i-colonnes-1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est au dessus à droite
-				if (caseMine[j]==i-colonnes+1){
-					entourage[i]+=1;
+			}
+			// Coin inférieur gauche
+			else if (i==lignes*colonnes-colonnes){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à droite
+					if (caseMine[j]==i-colonnes+1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est au dessus à gauche
-				if (caseMine[j]==i-colonnes-1){
-					entourage[i]+=1;
+			}
+			//	Si la mine est tout en haut
+			else if (i<colonnes){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à droite
+					if (caseMine[j]==i+colonnes+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à gauche
+					if (caseMine[j]==i+colonnes-1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est en dessous
-				if (caseMine[j]==i+colonnes){
-					entourage[i]+=1;
+			}
+			//	Si la mine est tout en bas
+			else if (i>lignes*colonnes-colonnes){ // Vérifier la condition
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à droite
+					if (caseMine[j]==i-colonnes+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à gauche
+					if (caseMine[j]==i-colonnes-1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est en dessous à droite
-				if (caseMine[j]==i+colonnes+1){
-					entourage[i]+=1;
+			}
+			//	Si la mine est tout à droite
+			else if (i%colonnes==colonnes-1){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à gauche
+					if (caseMine[j]==i-colonnes-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à gauche
+					if (caseMine[j]==i+colonnes-1){
+						entourage[i]+=1;
+					}
 				}
-				// Si une mine est en dessous à gauche
-				if (caseMine[j]==i+colonnes-1){
-					entourage[i]+=1;
+			}
+			//	Si la mine est tout à gauche
+			else if (i%colonnes==0){
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à droite
+					if (caseMine[j]==i-colonnes+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à droite
+					if (caseMine[j]==i+colonnes+1){
+						entourage[i]+=1;
+					}
+				}
+			} else {
+				for (int j=0;j<mines;j++){
+					// Si une mine est à droite
+					if (caseMine[j]==i+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est à gauche
+					if (caseMine[j]==i-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus
+					if (caseMine[j]==i-colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à droite
+					if (caseMine[j]==i-colonnes+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est au dessus à gauche
+					if (caseMine[j]==i-colonnes-1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous
+					if (caseMine[j]==i+colonnes){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à droite
+					if (caseMine[j]==i+colonnes+1){
+						entourage[i]+=1;
+					}
+					// Si une mine est en dessous à gauche
+					if (caseMine[j]==i+colonnes-1){
+						entourage[i]+=1;
+					}
 				}
 			}
 		}
-		
+
+		//	On place les cases à leur état actuel dans la grille
 		AffichePlateau(lignes*colonnes, caseSize, entourage, visible, minee);
     }
 

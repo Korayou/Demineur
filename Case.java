@@ -27,7 +27,6 @@ public class Case extends JComponent {
 				Color rose = new Color(236, 0, 140);
 				this.panel.setBackground(rose);
 			} else if (this.entourage>0){
-				System.out.println(""+ this.entourage);
 				this.panel.add(new Chiffre(entourage,caseSize));	
 			}
 		}

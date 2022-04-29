@@ -17,6 +17,5 @@ public class Chiffre extends JComponent {
     Color jaune = new Color(236, 214, 0);
     chiffre.setColor(jaune);
     chiffre.drawString(Integer.toString(this.entourage),caseSize.width*2/5,caseSize.height*3/5);
-    System.out.println(""+caseSize);
   }
 }
