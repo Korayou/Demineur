@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Case extends JComponent {
+public class Case extends JPanel {
 	private JPanel panel = new JPanel();
 	private int entourage;
 	private boolean visible;
 	private boolean minee;
+	private Listener listener;
 
 	public Case(Dimension caseSize, boolean visible, boolean minee, int entourage) {
 		super();
@@ -13,6 +14,8 @@ public class Case extends JComponent {
 		this.visible=visible;
 		this.minee=minee;
 		this.panel.setSize(caseSize);
+		this.listener = new Listener();
+		panel.addMouseListener(listener);
 
 		GridLayout unique = new GridLayout(1,1);
 		this.panel.setLayout(unique);

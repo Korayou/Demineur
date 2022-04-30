@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Grille extends JComponent {
+public class Grille extends JPanel  {
     private Dimension grilleSize=new Dimension(0,0);
     private JPanel grille= new JPanel();
 
@@ -23,7 +23,7 @@ public class Grille extends JComponent {
 		//	Initialisation : les cases sont cachées
 		boolean[] visible = new boolean[lignes*colonnes];
 		for (int i=0; i<lignes*colonnes;i++){
-			visible[i]=true;
+			visible[i]=false;
 		}
 
 
@@ -261,6 +261,7 @@ public class Grille extends JComponent {
 				}
 			}
 		}
+
 
 		//	On place les cases à leur état actuel dans la grille
 		AffichePlateau(lignes*colonnes, caseSize, entourage, visible, minee);
