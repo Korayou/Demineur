@@ -42,7 +42,7 @@ public class FrameJeu{
 		miseEnPage.weightx =1;
 		miseEnPage.weighty  = 0.85;
 		miseEnPage.fill = GridBagConstraints.BOTH;
-		fenetre.add(grille.getGrille(), miseEnPage);
+		fenetre.add(grille, miseEnPage);
 
 		// Mise en place de la fenêtre et affichage
 		fenetre.pack();

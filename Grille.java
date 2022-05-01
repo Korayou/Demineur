@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Grille extends JPanel  {
     private Dimension grilleSize=new Dimension(0,0);
-    private JPanel grille= new JPanel();
+	private Case[] plateau;
 
     // On crée La grille de jeu
     public Grille(int lignes, int colonnes, int mines){
@@ -16,8 +16,9 @@ public class Grille extends JPanel  {
 	    GridLayout damier = new GridLayout(lignes,colonnes);
         System.out.println("Taille des cases : "+caseSize);
         System.out.println("Taille de la Grille : "+grilleSize);
-		this.grille.setLayout(damier);
-        this.grille.setSize(grilleSize);
+		this.setLayout(damier);
+        this.setSize(grilleSize);
+		this.plateau= new Case[lignes*colonnes];
 
 
 		//	Initialisation : les cases sont cachées
@@ -42,6 +43,7 @@ public class Grille extends JPanel  {
 				}
 			}
 		}
+
 		//	On place maintenant les mines sur la plateau
 		boolean[] minee = new boolean[lignes*colonnes];
 		for (int i=0; i<lignes*colonnes;i++){
@@ -264,24 +266,19 @@ public class Grille extends JPanel  {
 
 
 		//	On place les cases à leur état actuel dans la grille
-		AffichePlateau(lignes*colonnes, caseSize, entourage, visible, minee);
+		AfficherPlateau(lignes*colonnes, caseSize, entourage, minee);
     }
 
-	//	Méthode pour afficher l'état des cases
-	protected void AffichePlateau(int taille, Dimension caseSize, int[] entourage, boolean[] visible, boolean[] minee){
+	//	Méthode pour Afficher le plateau
+	protected void AfficherPlateau(int taille, Dimension caseSize, int[] entourage, boolean[] minee){
 		for (int i=0;i<taille;i++){
-			Case panel = new Case(caseSize,visible[i],minee[i],entourage[i]);
-			this.grille.add(panel.getCase());
+			this.plateau[i]= new Case(caseSize,minee[i],entourage[i]);
+			this.add(this.plateau[i].getCase());
   		}
 	}
 
 	//	Méthode pour obtenir la taille de la grille de jeu
     public Dimension getGrilleSize() {
         return grilleSize;
-    }
-
-	//	Methode pour obtenir le panel pour l'affichage de la grille
-    public JPanel getGrille() {
-        return grille;
     }
 }
