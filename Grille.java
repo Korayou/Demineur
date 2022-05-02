@@ -21,28 +21,32 @@ public class Grille extends JPanel  {
 		this.plateau= new Case[lignes*colonnes];
 
 
-		//	Initialisation : les cases sont cachées
-		boolean[] visible = new boolean[lignes*colonnes];
-		for (int i=0; i<lignes*colonnes;i++){
-			visible[i]=false;
-		}
-
-
 		//	Instalation des mines
 		//	Création d'un tableau de nombres aléatoires pour savoir où les placer
 		int[] caseMine = new int[mines];
 		Random rand = new Random();
 		//	On initialise les emplacements des mines
-		for (int i=0;i<mines;i++){
+		caseMine[0] = rand.nextInt(lignes*colonnes);
+		System.out.println("mine 0 : "+ caseMine[0]);
+		for (int i=1;i<mines;i++){
 			caseMine[i] = rand.nextInt(lignes*colonnes);
 			//	On vérifie que la case n'a pas déjà été minée, auquel cas on change de case
-			for (int j=0;j<i;j++){
+			for (int j=0;j<=(i-1);j++){
 				if (caseMine[i]==caseMine[j]){
 					caseMine[i] = rand.nextInt(lignes*colonnes);
-					j=0;
+					j=-1;
+					System.out.println("Nouvelle case qu'on essaye de miner :"+ caseMine[i]);
+				} else if (caseMine[i]!=caseMine[j]){
+					System.out.println(""+ caseMine[i]+" != "+ caseMine[j]);
 				}
 			}
+			System.out.println("Mine posee :"+ "("+i+")"+caseMine[i]);
 		}
+
+		/*	Affichage de l'mplacement des mines
+		for (int i=0;i<mines;i++){
+			System.out.println(""+ caseMine[i]);
+		}*/
 
 		//	On place maintenant les mines sur la plateau
 		boolean[] minee = new boolean[lignes*colonnes];
@@ -273,6 +277,7 @@ public class Grille extends JPanel  {
 	protected void AfficherPlateau(int taille, Dimension caseSize, int[] entourage, boolean[] minee){
 		for (int i=0;i<taille;i++){
 			this.plateau[i]= new Case(caseSize,minee[i],entourage[i]);
+			this.plateau[i].setVisible();
 			this.add(this.plateau[i].getCase());
   		}
 	}
