@@ -9,7 +9,6 @@ public class Listener implements MouseListener{
 		Case panel = (Case)evenement.getSource();
 		if ((evenement.getButton() == MouseEvent.BUTTON1)&&(panel.getVisible()==false)&&(this.marquage==0)){
         	panel.setVisible();
-			panel.getCase();
 			if (panel.getMine()==true){
 				System.out.println("Perdu!");
 			}
@@ -34,16 +33,12 @@ public class Listener implements MouseListener{
 		}
 	}        
 	public void mouseEntered(MouseEvent evenement){
-		//	System.out.println("mouseEntered");
 	}         
 	public void mouseExited(MouseEvent evenement){
-		//	System.out.println("mouseExited");
 	}        
 	public void mousePressed(MouseEvent evenement){
-		//	System.out.println("mousePressed");
 	}      
 	public void mouseReleased(MouseEvent evenement){
-		//	System.out.println("mouseReleased");
 	}
 
 }

@@ -22,10 +22,19 @@ public class Case extends JPanel {
 		
 		GridLayout unique = new GridLayout(1,1);
 		this.setLayout(unique);
+		this.setBackground(new Color(70, 70, 70));
 	}
 
 	public void setVisible(){
 		this.visible=true;
+		if (this.minee == true) {
+			this.setBackground(new Color(236, 0, 140));	
+		} else {
+			this.setBackground(new Color(80, 80, 80));
+			if (this.entourage>0){
+				this.add(new Chiffre(entourage,caseSize));
+			}
+		}
 		this.updateUI();
 	}
 
@@ -33,21 +42,7 @@ public class Case extends JPanel {
 		return this.visible;
 	}
 
-	public Case getCase(){
-		if (this.visible == false) {
-			this.setBackground(new Color(70, 70, 70));
-		} else if (this.visible == true) {
-			if (this.minee == true) {
-				this.setBackground(new Color(236, 0, 140));	
-			} else {
-				this.setBackground(new Color(80, 80, 80));
-				if (this.entourage>0){
-					this.add(new Chiffre(entourage,caseSize));
-				}
-			}
-		}
-		return this;
-	}
+	
 
 	public boolean getMine(){
 		return this.minee;

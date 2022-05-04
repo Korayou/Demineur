@@ -267,7 +267,7 @@ public class Grille extends JPanel  {
 	protected void AfficherPlateau(int taille, Dimension caseSize, int[] entourage, boolean[] minee){
 		for (int i=0;i<taille;i++){
 			this.plateau[i]= new Case(caseSize,minee[i],entourage[i]);
-			this.add(this.plateau[i].getCase());
+			this.add(this.plateau[i]);
   		}
 	}
 

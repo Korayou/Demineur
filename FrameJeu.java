@@ -3,7 +3,7 @@ import java.awt.*;
 
 // Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
 public class FrameJeu{
-	public FrameJeu(Grille grille, int mines) {
+	public FrameJeu(Grille grille) {
 
 		// On récupère les dimensions de l'écran pour adapter la taille par défaut de notre fenêtre
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
