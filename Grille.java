@@ -135,7 +135,6 @@ public class Grille extends JPanel  {
 	//	Méthode pour Afficher le plateau
 	protected void AfficherPlateau(int taille){
 		for (int i=0;i<taille;i++){
-			this.plateau[i].setVisible();
 			this.add(this.plateau[i]);
   		}
 	}

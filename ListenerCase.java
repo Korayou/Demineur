@@ -16,7 +16,7 @@ public class ListenerCase implements MouseListener{
 			}
 		}
 		//	Si le joueur clique droit, la case sera marquée
-		if (evenement.getButton() == MouseEvent.BUTTON3) {
+		if ((evenement.getButton() == MouseEvent.BUTTON3)&&(panel.getVisible()==false)) {
 			// Au premier click, on place une étoile pour indiquer la présence d'une mine
         	if (this.marquage==0){
 				panel.add(new Etoile(panel.getSize()), BorderLayout.CENTER);

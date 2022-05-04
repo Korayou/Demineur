@@ -1,6 +1,5 @@
 public class Test {
     public static void main(String[] args) {
-        Grille grille=new Grille(10,15,15);
-        new FrameJeu(grille);
+        new FrameJeu(15,20,20);
     }  
 }
