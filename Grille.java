@@ -3,11 +3,14 @@ import java.awt.*;
 import java.util.Random;
 
 public class Grille extends JPanel  {
+	private EtatPartie banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
+	private int taille;
+	private int mines;
 
     // Définition du constructeur qui correspond à une grille de jeu
-    public Grille(int lignes, int colonnes, int mines){
+    public Grille(EtatPartie banniere,int lignes, int colonnes, int mines){
 		
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -18,8 +21,11 @@ public class Grille extends JPanel  {
         System.out.println("Taille de la Grille : "+grilleSize);
 		this.setLayout(damier);
         this.setSize(grilleSize);
+		this.taille=lignes*colonnes;
+		this.mines=mines;
+		this.banniere=banniere;
 		// On génère le plateau contenant les cases
-		GenererPlateau(lignes*colonnes, caseSize);
+		GenererPlateau(taille, caseSize);
 
 
 		//	Instalation des mines
@@ -27,20 +33,20 @@ public class Grille extends JPanel  {
 		int[] caseMine = new int[mines];
 		Random rand = new Random();
 		//	On initialise les emplacements des mines
-		caseMine[0] = rand.nextInt(lignes*colonnes);
+		caseMine[0] = rand.nextInt(taille);
 		for (int i=1;i<mines;i++){
-			caseMine[i] = rand.nextInt(lignes*colonnes);
+			caseMine[i] = rand.nextInt(taille);
 			//	On vérifie que la case n'a pas déjà été minée, auquel cas on change de case
 			for (int j=0;j<=(i-1);j++){
 				if (caseMine[i]==caseMine[j]){
-					caseMine[i] = rand.nextInt(lignes*colonnes);
+					caseMine[i] = rand.nextInt(taille);
 					j=-1;
 				}
 			}
 		}
 
 		//	On place maintenant les mines sur la plateau en fixant la variable minee des cases à true
-		for (int i=0; i<lignes*colonnes;i++){
+		for (int i=0; i<taille;i++){
 			for (int j=0;j<mines;j++){
 				if (caseMine[j]==i){
 					plateau[i].setMine();
@@ -49,7 +55,7 @@ public class Grille extends JPanel  {
 		}
 
 		//	On cherche à connaître le nombre de mines autour de chaque case
-		for (int i=0;i<lignes*colonnes;i++){
+		for (int i=0;i<taille;i++){
 			int entourage = 0;
 			//  On vérifie pour chaque case qu'elle n'est pas déjà à l'extrémité du plateau où on cherche une case
 			//	Mine au dessus à droite
@@ -69,7 +75,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//  Mine en dessous à droite
-			if ((i<=lignes*colonnes-colonnes)&&(i%colonnes!=colonnes-1)){
+			if ((i<=taille-colonnes)&&(i%colonnes!=colonnes-1)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes+1){
 						entourage+=1;
@@ -77,7 +83,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//  Mine en bas à gauche
-			if ((i!=lignes*colonnes-colonnes)&&(i%colonnes!=0)){
+			if ((i!=taille-colonnes)&&(i%colonnes!=0)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes-1){
 						entourage+=1;
@@ -93,7 +99,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//	Mine en dessous
-			if (i<=lignes*colonnes-colonnes){
+			if (i<=taille-colonnes){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes){
 						entourage+=1;
@@ -121,14 +127,14 @@ public class Grille extends JPanel  {
 
 
 		//	On place les cases à leur état actuel dans la grille
-		AfficherPlateau(lignes*colonnes);
+		AfficherPlateau(taille);
     }
 
 	//	Méthode pour Génerer le plateau
 	protected void GenererPlateau(int taille, Dimension caseSize){
 		this.plateau= new Case[taille];
 		for (int i=0;i<taille;i++){
-			this.plateau[i]= new Case(caseSize);
+			this.plateau[i]= new Case(this,caseSize);
 		}
 	}
 
@@ -143,4 +149,16 @@ public class Grille extends JPanel  {
     public Dimension getGrilleSize(){
         return grilleSize;
     }
+
+	//	Méthode pour déterminer le nombre de mines restantes
+	public void MinesLeft(){
+		int minesLeft=this.mines;
+		for (int i=0;i<taille;i++){
+			//System.out.println("case repéree ? == "+plateau[i].getReperee());
+			if(plateau[i].getReperee()==true){
+				minesLeft-=1;
+			}
+		}
+		this.banniere.setMinesLeft(minesLeft);
+	}
 }

@@ -8,7 +8,7 @@ public class FrameJeu{
 		// On récupère les dimensions de l'écran pour adapter la taille par défaut de notre fenêtre
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-		// On crée ensuite notre fenêtre avec des valeurs par défaut
+		// On crée ensuite notre fenêtre
 		JFrame fenetre = new JFrame("Démineur - En Jeu");
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -16,13 +16,17 @@ public class FrameJeu{
 		fenetre.setLayout(new GridBagLayout());
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
-		//	Création de la grille de Jeu
-        Grille grille=new Grille(lignes,colonnes,mines);
-
 		// Création de la bannière
-		EtatPartie banniere = new EtatPartie(grille,mines);
+		EtatPartie banniere = new EtatPartie(mines);
+
+		//	Création de la grille de Jeu
+        Grille grille=new Grille(banniere,lignes,colonnes,mines);
+
 
 		//	Mise en place de la bannière
+		Dimension grilleSize= grille.getGrilleSize();
+		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/8);
+		banniere.setSize(banniereSize);
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;

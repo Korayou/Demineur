@@ -19,7 +19,7 @@ public class ListenerCase implements MouseListener{
 		if ((evenement.getButton() == MouseEvent.BUTTON3)&&(panel.getVisible()==false)) {
 			// Au premier click, on place une étoile pour indiquer la présence d'une mine
         	if (this.marquage==0){
-				panel.add(new Etoile(panel.getSize()), BorderLayout.CENTER);
+				panel.setReperee(true);
 				this.marquage=1;
 			}
 			//	Au second, on met un point d'interrogation en cas de soupçon pour aider à la réflexion
@@ -30,6 +30,7 @@ public class ListenerCase implements MouseListener{
 			}
 			//	Au troisième click on efface tout marquage
 			else if (this.marquage==2){
+				panel.setReperee(false);
 				panel.removeAll();
 				this.marquage=0;
 			}

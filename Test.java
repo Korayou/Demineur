@@ -1,5 +1,5 @@
 public class Test {
     public static void main(String[] args) {
-        new FrameJeu(15,20,20);
+        new FrameJeu(15,20,40);
     }  
 }

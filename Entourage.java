@@ -14,8 +14,7 @@ public class Entourage extends JComponent {
     Graphics chiffre = pinceau.create();
     Font font = new Font("Arial", Font.BOLD, caseSize.width*2/5);
     chiffre.setFont(font);
-    Color jaune = new Color(236, 214, 0);
-    chiffre.setColor(jaune);
+    chiffre.setColor(new Color(236, 214, 0));
     chiffre.drawString(Integer.toString(this.entourage),caseSize.width*2/5,caseSize.height*3/5);
   }
 }
