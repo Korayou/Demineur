@@ -8,17 +8,15 @@ public class MineLeft extends JComponent {
     super();
     this.minesLeft = minesLeft;
     this.banniereSize=banniereSize;
-    System.out.println("Mines restantes : "+this.minesLeft);
   }
   @Override
   protected void paintComponent(Graphics pinceau) {
+    this.setSize(banniereSize);
     Graphics chiffre = pinceau.create();
-    //Font font = new Font("Arial", Font.BOLD, banniereSize.width*1/10);
-    //chiffre.setFont(font);
-    //chiffre.setColor(new Color(236, 214, 0));
-    //chiffre.drawString(Integer.toString(this.minesLeft),banniereSize.width*2/5,banniereSize.height/2);
-    //chiffre.drawString("ALED",banniereSize.width/2,banniereSize.height/2);
-    chiffre.setColor(Color.black);
-    chiffre.fillRect(10, 10, 200, 100);
+    Font font = new Font("Arial", Font.BOLD, banniereSize.width*1/10);
+    chiffre.setFont(font);
+    chiffre.setColor(new Color(0, 22, 236));
+    chiffre.drawString(Integer.toString(this.minesLeft),banniereSize.width*1/5,banniereSize.height*2/3);
+    System.out.println(this.getSize());
   }
 }

@@ -8,6 +8,7 @@ public class Grille extends JPanel  {
 	private Case[] plateau;
 	private int taille;
 	private int mines;
+	private int minesLeft;
 
     // Définition du constructeur qui correspond à une grille de jeu
     public Grille(EtatPartie banniere,int lignes, int colonnes, int mines){
@@ -17,8 +18,6 @@ public class Grille extends JPanel  {
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-        System.out.println("Taille des cases : "+caseSize);
-        System.out.println("Taille de la Grille : "+grilleSize);
 		this.setLayout(damier);
         this.setSize(grilleSize);
 		this.taille=lignes*colonnes;
@@ -152,13 +151,13 @@ public class Grille extends JPanel  {
 
 	//	Méthode pour déterminer le nombre de mines restantes
 	public void MinesLeft(){
-		int minesLeft=this.mines;
+		this.minesLeft=this.mines;
 		for (int i=0;i<taille;i++){
 			//System.out.println("case repéree ? == "+plateau[i].getReperee());
 			if(plateau[i].getReperee()==true){
-				minesLeft-=1;
+				this.minesLeft-=1;
 			}
 		}
-		this.banniere.setMinesLeft(minesLeft);
+		this.banniere.setMinesLeft(this.minesLeft);
 	}
 }
