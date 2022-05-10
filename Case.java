@@ -49,7 +49,7 @@ public class Case extends JPanel {
 			}
 			// Mise à jour de l'affichage de la case
 			this.updateUI();
-			if (this.getEntourage() == 0) {
+			if ((this.entourage == 0)&&(minee==false)) {
 				this.grille.setEntourageVisible(this);
 			}
 			this.grille.verifVictoire();
