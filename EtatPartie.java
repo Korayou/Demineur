@@ -10,12 +10,13 @@ public class EtatPartie extends JPanel {
 		this.setBackground( new Color(0, 236, 96));
 		
 		this.setSize(200,100);
+		//	On ajoute le compteur de mines restantes
 		setMinesLeft(mines);
 		
     }
 
 	//	Méthode pour afficher le nombre de mines restantes
-	protected void setMinesLeft(int minesLeft){
+	public void setMinesLeft(int minesLeft){
 		this.removeAll();
 		this.add(new MineLeft(minesLeft,this.getSize()));
 		//System.out.println("Mines restantes : "+minesLeft);

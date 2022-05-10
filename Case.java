@@ -52,6 +52,7 @@ public class Case extends JPanel {
 			if (this.getEntourage() == 0) {
 				this.grille.setEntourageVisible(this);
 			}
+			this.grille.verifVictoire();
 		}
 	}
 
@@ -90,6 +91,7 @@ public class Case extends JPanel {
 		this.reperee=reperee;
 		if ((reperee)&&(minee)){
 			this.deminee=true;
+			this.grille.verifVictoire();
 		}
 		this.grille.MinesLeft();
 	}

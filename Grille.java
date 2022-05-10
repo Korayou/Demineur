@@ -62,7 +62,7 @@ public class Grille extends JPanel  {
 			int entourage = 0;
 			//  On vérifie pour chaque case qu'elle n'est pas déjà à l'extrémité du plateau où on cherche une case
 			//	Mine au dessus à droite
-			if ((i>colonnes)&&(i%colonnes!=colonnes-1)){
+			if ((i>=colonnes)&&(i%colonnes!=colonnes-1)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i-colonnes+1){
 						entourage+=1;
@@ -70,7 +70,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//	Mine au dessus à gauche
-			if ((i>colonnes)&&(i%colonnes!=0)){
+			if ((i>=colonnes)&&(i%colonnes!=0)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i-colonnes-1){
 						entourage+=1;
@@ -78,7 +78,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//  Mine en dessous à droite
-			if ((i<=taille-colonnes)&&(i%colonnes!=colonnes-1)){
+			if ((i<taille-colonnes)&&(i%colonnes!=colonnes-1)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes+1){
 						entourage+=1;
@@ -86,7 +86,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//  Mine en bas à gauche
-			if ((i<=taille-colonnes)&&(i%colonnes!=0)){
+			if ((i<taille-colonnes)&&(i%colonnes!=0)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes-1){
 						entourage+=1;
@@ -94,7 +94,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//	Mine au dessus
-			if (i>colonnes){
+			if (i>=colonnes){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i-colonnes){
 						entourage+=1;
@@ -102,7 +102,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//	Mine en dessous
-			if (i<=taille-colonnes){
+			if (i<taille-colonnes){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes){
 						entourage+=1;
@@ -156,8 +156,7 @@ public class Grille extends JPanel  {
 	//	Méthode pour déterminer le nombre de mines restantes
 	public void MinesLeft(){
 		this.minesLeft=this.mines;
-		for (int i=0;i<taille;i++){
-			//System.out.println("case repéree ? == "+plateau[i].getReperee());
+		for (int i=0;i<this.taille;i++){
 			if(plateau[i].getReperee()==true){
 				this.minesLeft-=1;
 			}
@@ -165,18 +164,31 @@ public class Grille extends JPanel  {
 		this.banniere.setMinesLeft(this.minesLeft);
 	}
 
+	// 	Méthode déterminant les conditions de victoire
+	public void verifVictoire(){
+		int casesDeminees=0;
+		for (int i=0;i<this.taille;i++){
+			if(plateau[i].getDeminee()==true){
+				casesDeminees+=1;
+			}
+		}
+		if (taille==casesDeminees){
+			new FrameVictoire();
+		}
+	}
+
 	//	Méthode pour rendre visibles les cases autour d'un 0
 	public void setEntourageVisible(Case panel){
 		for(int i=0; i<this.taille;i++){
 			if (plateau[i]==panel){
 				//	Mine au dessus à droite
-				if ((i>colonnes)&&(i%colonnes!=colonnes-1)){
+				if ((i>=colonnes)&&(i%colonnes!=colonnes-1)){
 					for (int j=0;j<mines;j++){
 						plateau[i-colonnes+1].setVisible();
 					}
 				}
 				//	Mine au dessus à gauche
-				if ((i>colonnes)&&(i%colonnes!=0)){
+				if ((i>=colonnes)&&(i%colonnes!=0)){
 					for (int j=0;j<mines;j++){
 						plateau[i-colonnes-1].setVisible();
 					}
@@ -194,7 +206,7 @@ public class Grille extends JPanel  {
 					}
 				}
 				//	Mine au dessus
-				if (i>colonnes){
+				if (i>=colonnes){
 					for (int j=0;j<mines;j++){
 						plateau[i-colonnes].setVisible();
 					}
