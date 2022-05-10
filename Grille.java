@@ -173,7 +173,7 @@ public class Grille extends JPanel  {
 			}
 		}
 		if (taille==casesDeminees){
-			new FrameVictoire();
+			new FrameVictoire(this);
 		}
 	}
 
