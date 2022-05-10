@@ -17,6 +17,5 @@ public class MineLeft extends JComponent {
     chiffre.setFont(font);
     chiffre.setColor(new Color(0, 22, 236));
     chiffre.drawString(Integer.toString(this.minesLeft),banniereSize.width*1/5,banniereSize.height*2/3);
-    System.out.println(this.getSize());
   }
 }

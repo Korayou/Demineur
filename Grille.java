@@ -6,6 +6,8 @@ public class Grille extends JPanel  {
 	private EtatPartie banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
+	private int lignes;
+	private int colonnes;
 	private int taille;
 	private int mines;
 	private int minesLeft;
@@ -20,6 +22,8 @@ public class Grille extends JPanel  {
 	    GridLayout damier = new GridLayout(lignes,colonnes);
 		this.setLayout(damier);
         this.setSize(grilleSize);
+		this.lignes=lignes;
+		this.colonnes=colonnes;
 		this.taille=lignes*colonnes;
 		this.mines=mines;
 		this.banniere=banniere;
@@ -82,7 +86,7 @@ public class Grille extends JPanel  {
 				}
 			}
 			//  Mine en bas à gauche
-			if ((i!=taille-colonnes)&&(i%colonnes!=0)){
+			if ((i<=taille-colonnes)&&(i%colonnes!=0)){
 				for (int j=0;j<mines;j++){
 					if (caseMine[j]==i+colonnes-1){
 						entourage+=1;
@@ -159,5 +163,61 @@ public class Grille extends JPanel  {
 			}
 		}
 		this.banniere.setMinesLeft(this.minesLeft);
+	}
+
+	//	Méthode pour rendre visibles les cases autour d'un 0
+	public void setEntourageVisible(Case panel){
+		for(int i=0; i<this.taille;i++){
+			if (plateau[i]==panel){
+				//	Mine au dessus à droite
+				if ((i>colonnes)&&(i%colonnes!=colonnes-1)){
+					for (int j=0;j<mines;j++){
+						plateau[i-colonnes+1].setVisible();
+					}
+				}
+				//	Mine au dessus à gauche
+				if ((i>colonnes)&&(i%colonnes!=0)){
+					for (int j=0;j<mines;j++){
+						plateau[i-colonnes-1].setVisible();
+					}
+				}
+				//  Mine en dessous à droite
+				if ((i<taille-colonnes)&&(i%colonnes!=colonnes-1)){
+					for (int j=0;j<mines;j++){
+						plateau[i+colonnes+1].setVisible();
+					}
+				}
+				//  Mine en bas à gauche
+				if ((i<taille-colonnes)&&(i%colonnes!=0)){
+					for (int j=0;j<mines;j++){
+						plateau[i+colonnes-1].setVisible();
+					}
+				}
+				//	Mine au dessus
+				if (i>colonnes){
+					for (int j=0;j<mines;j++){
+						plateau[i-colonnes].setVisible();
+					}
+				}
+				//	Mine en dessous
+				if (i<taille-colonnes){
+					for (int j=0;j<mines;j++){
+						plateau[i+colonnes].setVisible();
+					}
+				}
+				//	Mine à droite
+				if (i%colonnes!=colonnes-1){
+					for (int j=0;j<mines;j++){
+						plateau[i+1].setVisible();
+					}
+				}
+				//	Mine à gauche
+				if (i%colonnes!=0){
+					for (int j=0;j<mines;j++){
+						plateau[i-1].setVisible();
+					}
+				}
+			}
+		}
 	}
 }

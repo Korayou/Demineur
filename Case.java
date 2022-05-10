@@ -33,20 +33,26 @@ public class Case extends JPanel {
 
 	//	Méthode qui permet de montrer la case, et de la considérer comme déminée
 	public void setVisible(){
-		this.visible=true;	
-		this.deminee=true;
 		
-		// On affiche une mine si la case est minée, sinon le nombre de mines autour d'elle
-		if (this.minee == true) {
-			this.setBackground(new Color(236, 0, 140));	
-		} else {
-			this.setBackground(new Color(80, 80, 80));
-			if (this.entourage>0){
-				this.add(new Entourage(this.entourage,this.getSize()));
+		if (this.visible==false){
+			this.visible = true;
+			this.deminee = true;
+
+			// On affiche une mine si la case est minée, sinon le nombre de mines autour d'elle
+			if (this.minee == true) {
+				this.setBackground(new Color(236, 0, 140));
+			} else {
+				this.setBackground(new Color(80, 80, 80));
+				if (this.entourage > 0) {
+					this.add(new Entourage(this.entourage, this.getSize()));
+				}
+			}
+			// Mise à jour de l'affichage de la case
+			this.updateUI();
+			if (this.getEntourage() == 0) {
+				this.grille.setEntourageVisible(this);
 			}
 		}
-		//	Mise à jour de l'affichage de la case
-		this.updateUI();
 	}
 
 	//	Méthode permettant de dire si la case est cachée ou visible
@@ -69,10 +75,19 @@ public class Case extends JPanel {
 		this.entourage=entourage;
 	}
 
+	//	Renvoi l'entourage de la case 
+	public int getEntourage(){
+		return this.entourage;
+	}
+
+	//	Permet d'acceder à la grille sur laquelle est la case
+	public Grille getGrille(){
+		return this.grille;
+	}
+
 	//	Méthode pour savoir si le joueur pense que la case est minée
 	public void setReperee(boolean reperee){
 		this.reperee=reperee;
-		this.add(new Etoile(this.getSize()), BorderLayout.CENTER);
 		if ((reperee)&&(minee)){
 			this.deminee=true;
 		}
