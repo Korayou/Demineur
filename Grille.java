@@ -28,7 +28,7 @@ public class Grille extends JPanel  {
 		this.mines=mines;
 		this.banniere=banniere;
 		// On génère le plateau contenant les cases
-		GenererPlateau(taille, caseSize);
+		GenererPlateau(caseSize);
 
 
 		//	Instalation des mines
@@ -130,21 +130,28 @@ public class Grille extends JPanel  {
 
 
 		//	On place les cases à leur état actuel dans la grille
-		AfficherPlateau(taille);
+		AfficherPlateau();
     }
 
 	//	Méthode pour Génerer le plateau
-	protected void GenererPlateau(int taille, Dimension caseSize){
-		this.plateau= new Case[taille];
-		for (int i=0;i<taille;i++){
+	protected void GenererPlateau(Dimension caseSize){
+		this.plateau= new Case[this.taille];
+		for (int i=0;i<this.taille;i++){
 			this.plateau[i]= new Case(this,caseSize);
 		}
 	}
 
 	//	Méthode pour Afficher le plateau
-	protected void AfficherPlateau(int taille){
-		for (int i=0;i<taille;i++){
+	protected void AfficherPlateau(){
+		for (int i=0;i<this.taille;i++){
 			this.add(this.plateau[i]);
+  		}
+	}
+
+	//	Méthode pour montrer toutes les cases à la fin de la partie
+	public void setAllVisible(){
+		for (int i=0;i<this.taille;i++){
+			this.plateau[i].setVisible();
   		}
 	}
 
@@ -166,15 +173,23 @@ public class Grille extends JPanel  {
 
 	// 	Méthode déterminant les conditions de victoire
 	public void verifVictoire(){
-		int casesDeminees=0;
+		int casesVisibles=0;
 		for (int i=0;i<this.taille;i++){
-			if(plateau[i].getDeminee()==true){
-				casesDeminees+=1;
+			if(plateau[i].getVisible()==true){
+				casesVisibles+=1;
 			}
 		}
-		if (taille==casesDeminees){
-			new FrameVictoire(this);
+		//	Lance la victoire si les conditions sont remplies
+		if (taille-mines==casesVisibles){
+			for (int i=0;i<taille;i++){
+				this.plateau[i].setVictoire();
+			}
 		}
+	}
+
+	//	Methode pour récupérer le plateau de jeu
+	public Case[] getPlateau(){
+		return this.plateau;
 	}
 
 	//	Méthode pour rendre visibles les cases autour d'un 0

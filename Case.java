@@ -8,17 +8,17 @@ public class Case extends JPanel {
 	private boolean visible;
 	private boolean minee;
 	private boolean reperee;
-	private boolean deminee;
 	private ListenerCase listener;
+	private boolean finDePartie;
 
 	//	Définition du constructeur
 	public Case(Grille grille, Dimension caseSize) {
 		super();
 		//	Initialisation des attributs 
 		this.visible=false;
-		this.reperee=false;		
-		this.deminee=false;
+		this.reperee=false;	
 		this.grille=grille;
+		this.finDePartie=false;
 		
 		//	On place un listener sur notre case pour qu'elle réagisse aux clicks du joueur
 		this.listener = new ListenerCase();
@@ -31,28 +31,34 @@ public class Case extends JPanel {
 		this.setBackground(new Color(70, 70, 70));
 	}
 
-	//	Méthode qui permet de montrer la case, et de la considérer comme déminée
+	//	Méthode qui permet de montrer la case, et fait perdre si elle est minée
 	public void setVisible(){
 		
-		if (this.visible==false){
+		if (!this.visible){
 			this.visible = true;
-			this.deminee = true;
 
 			// On affiche une mine si la case est minée, sinon le nombre de mines autour d'elle
-			if (this.minee == true) {
+			if ((this.minee)&&(!this.finDePartie)) {
+				this.setBackground(new Color(200, 0, 0));
+				this.grille.setAllVisible();
+				this.finDePartie=true;
+			}
+			else if ((this.minee)&&(this.finDePartie)) {
 				this.setBackground(new Color(236, 0, 140));
 			} else {
 				this.setBackground(new Color(80, 80, 80));
+				
 				if (this.entourage > 0) {
 					this.add(new Entourage(this.entourage, this.getSize()));
 				}
+				this.grille.verifVictoire();
 			}
+
 			// Mise à jour de l'affichage de la case
 			this.updateUI();
-			if ((this.entourage == 0)&&(minee==false)) {
+			if ((this.entourage == 0)&&(!minee)) {
 				this.grille.setEntourageVisible(this);
 			}
-			this.grille.verifVictoire();
 		}
 	}
 
@@ -90,7 +96,6 @@ public class Case extends JPanel {
 	public void setReperee(boolean reperee){
 		this.reperee=reperee;
 		if ((reperee)&&(minee)){
-			this.deminee=true;
 			this.grille.verifVictoire();
 		}
 		this.grille.MinesLeft();
@@ -101,8 +106,18 @@ public class Case extends JPanel {
 		return this.reperee;
 	}
 
-	//	Methode pour dire si la case a été déminée
-	public boolean getDeminee(){
-		return this.deminee;
+	//	Methode pour montrer que la partie est gagnée
+	public void setVictoire(){
+		this.finDePartie=true;
+		if (this.minee==true){
+			removeAll();
+			this.setBackground(new Color(236, 214, 0));;
+			
+		}
+	}
+
+	//	Methode pour savoir dans le Listener si la partie est finie ou non 
+	public boolean getFinDePartie(){
+		return this.finDePartie;
 	}
 }
