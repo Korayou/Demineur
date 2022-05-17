@@ -8,11 +8,9 @@ public class ListenerCase implements MouseListener {
 	// Méthode qui va servir à détecter le click de la souris
 	public void mouseClicked(MouseEvent evenement) {
 		Case panel = (Case) evenement.getSource();
-		if (panel.getFinDePartie() == false) {
-			// Si le joueur clique gauche, tant que la case n'est pas marquée, elle sera
-			// révélée
-			if ((evenement.getButton() == MouseEvent.BUTTON1) && (panel.getVisible() == false)
-					&& (this.marquage == 0)) {
+		if (panel.getEnJeu()) {
+			// Si le joueur clique gauche, on tente de révéler la case
+			if ((evenement.getButton() == MouseEvent.BUTTON1)&&(!panel.getVisible())&&(!panel.getReperee())){
 				panel.setVisible();
 			}
 			// Si le joueur clique droit, la case sera marquée

@@ -16,6 +16,6 @@ public class MineLeft extends JComponent {
     Font font = new Font("Arial", Font.BOLD, banniereSize.width/50);
     chiffre.setFont(font);
     chiffre.setColor(new Color(0, 22, 236));
-    chiffre.drawString("Nombre de mines restantes : "+Integer.toString(this.minesLeft),banniereSize.width/100,banniereSize.height*2/3);
+    chiffre.drawString("Mines restantes : "+Integer.toString(this.minesLeft),banniereSize.width/100,banniereSize.height*2/3);
   }
 }

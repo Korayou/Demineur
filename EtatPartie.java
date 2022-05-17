@@ -14,7 +14,6 @@ public class EtatPartie extends JPanel {
 	public void setMinesLeft(int minesLeft){
 		this.removeAll();
 		this.add(new MineLeft(minesLeft,this.getSize()));
-		//System.out.println("Mines restantes : "+minesLeft);
 		this.repaint();
 		this.updateUI();
 	}

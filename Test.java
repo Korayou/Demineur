@@ -1,6 +1,6 @@
 public class Test {
     public static void main(String[] args) {
-        new FrameJeu(20,25,5);
+        new FrameJeu(20,25,10);
     }  
 }
 
@@ -15,4 +15,7 @@ public class Test {
 *                           boolean markSupported();
 *                           void mark(int);
 *                           void reset();
+*
+*   BufferedReader
+*   BufferedWriter
 */

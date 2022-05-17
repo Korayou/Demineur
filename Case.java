@@ -8,7 +8,7 @@ public class Case extends JPanel {
 	private boolean visible;
 	private boolean minee;
 	private boolean reperee;
-	private boolean finDePartie;
+	private boolean enJeu;
 
 	//	Définition du constructeur
 	public Case(Grille grille, Dimension caseSize) {
@@ -17,7 +17,7 @@ public class Case extends JPanel {
 		this.visible=false;
 		this.reperee=false;	
 		this.grille=grille;
-		//this.finDePartie=false;
+		this.enJeu=true;
 		
 		//	On place un listener sur notre case pour qu'elle réagisse aux clicks du joueur
 		this.addMouseListener(new ListenerCase());
@@ -31,35 +31,44 @@ public class Case extends JPanel {
 
 	//	Méthode qui permet de montrer la case, et fait perdre si elle est minée
 	public void setVisible(){
-		
+
+		// On vérfie que la case n'est pas déjà visible
 		if (!this.visible){
 			this.visible = true;
 
-			// On affiche une mine si la case est minée, sinon le nombre de mines autour d'elle
-			if ((this.minee)&&(!this.finDePartie)) {
-				this.removeAll();
-				System.out.println(this.finDePartie);
-				this.setBackground(new Color(200, 0, 0));
-				this.finDePartie=true;
-				this.grille.setAllVisible();
-				System.out.println(this.finDePartie);
-			}
-			else if ((this.minee)&&(this.finDePartie)) {
-				this.setBackground(new Color(236, 0, 140));
-			} else {
+			// On affiche dans la case le nombre de mine adjacentes ( rien si aucune )
+			if ((!this.minee)&&(!this.reperee)){
 				this.setBackground(new Color(80, 80, 80));
-				
 				if (this.entourage > 0) {
 					this.add(new Entourage(this.entourage, this.getSize()));
 				}
-				this.grille.verifVictoire();
+				//	Cherche a afficher les cases adjacente s'il n'y a aucune mine autour
+				else if (this.entourage == 0) {
+					this.grille.setEntourageVisible(this);
+				}
+				if (this.enJeu){
+					this.grille.verifVictoire();
+				}
+			}
+			// 	S'il y a une mine et que c'est la première cliquée
+			else if ((this.minee)&&(this.enJeu)) {
+				System.out.println("Fin de partie première mine avant boum:"+this.enJeu);
+				this.enJeu=false;
+				System.out.println("Fin de partie première mine après boum:"+this.enJeu);
+				this.setBackground(new Color(200, 0, 0));
+				this.grille.setAllVisible();
+			}
+			//	S'il y a une mine est que la partie est finie
+			if ((this.minee)&&(!this.enJeu)) {
+				System.out.println("Fin de partie autres mines:"+this.enJeu);
+				this.setBackground(new Color(236, 0, 140));
+
+			//	Sinon le nombre de mines autour d'elle
 			}
 
 			// Mise à jour de l'affichage de la case
 			this.updateUI();
-			if ((this.entourage == 0)&&(!minee)) {
-				this.grille.setEntourageVisible(this);
-			}
+			
 		}
 	}
 
@@ -109,7 +118,7 @@ public class Case extends JPanel {
 
 	//	Methode pour montrer que la partie est gagnée
 	public void setVictoire(){
-		this.finDePartie=true;
+		this.enJeu=false;
 		if (this.minee==true){
 			removeAll();
 			this.setBackground(new Color(236, 214, 0));;
@@ -118,7 +127,7 @@ public class Case extends JPanel {
 	}
 
 	//	Methode pour savoir dans le Listener si la partie est finie ou non 
-	public boolean getFinDePartie(){
-		return this.finDePartie;
+	public boolean getEnJeu(){
+		return this.enJeu;
 	}
 }
