@@ -7,13 +7,8 @@ public class EtatPartie extends JPanel {
 		super();
 
         //  On défini un style à la bannière
-		this.setBackground( new Color(0, 236, 96));
-		
-		this.setSize(200,100);
-		//	On ajoute le compteur de mines restantes
-		setMinesLeft(mines);
-		
-    }
+		this.setBackground( new Color(0, 236, 96));	
+	}
 
 	//	Méthode pour afficher le nombre de mines restantes
 	public void setMinesLeft(int minesLeft){

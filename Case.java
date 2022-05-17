@@ -8,7 +8,6 @@ public class Case extends JPanel {
 	private boolean visible;
 	private boolean minee;
 	private boolean reperee;
-	private ListenerCase listener;
 	private boolean finDePartie;
 
 	//	Définition du constructeur
@@ -18,11 +17,10 @@ public class Case extends JPanel {
 		this.visible=false;
 		this.reperee=false;	
 		this.grille=grille;
-		this.finDePartie=false;
+		//this.finDePartie=false;
 		
 		//	On place un listener sur notre case pour qu'elle réagisse aux clicks du joueur
-		this.listener = new ListenerCase();
-		this.addMouseListener(this.listener);
+		this.addMouseListener(new ListenerCase());
 		
 		//	Mise en page de la case et couleur par défaut
 		this.setSize(caseSize);
@@ -39,9 +37,12 @@ public class Case extends JPanel {
 
 			// On affiche une mine si la case est minée, sinon le nombre de mines autour d'elle
 			if ((this.minee)&&(!this.finDePartie)) {
+				this.removeAll();
+				System.out.println(this.finDePartie);
 				this.setBackground(new Color(200, 0, 0));
-				this.grille.setAllVisible();
 				this.finDePartie=true;
+				this.grille.setAllVisible();
+				System.out.println(this.finDePartie);
 			}
 			else if ((this.minee)&&(this.finDePartie)) {
 				this.setBackground(new Color(236, 0, 140));

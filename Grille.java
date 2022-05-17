@@ -6,26 +6,27 @@ public class Grille extends JPanel  {
 	private EtatPartie banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
-	private int lignes;
 	private int colonnes;
 	private int taille;
 	private int mines;
 	private int minesLeft;
 
     // Définition du constructeur qui correspond à une grille de jeu
-    public Grille(EtatPartie banniere,int lignes, int colonnes, int mines){
+    public Grille(int lignes, int colonnes, int mines){
 		
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
+		EtatPartie banniere = new EtatPartie(mines);
+		banniere.setSize(grilleSize.width,grilleSize.height/8);
 		this.setLayout(damier);
         this.setSize(grilleSize);
-		this.lignes=lignes;
 		this.colonnes=colonnes;
 		this.taille=lignes*colonnes;
 		this.mines=mines;
+		this.minesLeft=mines;
 		this.banniere=banniere;
 		// On génère le plateau contenant les cases
 		GenererPlateau(caseSize);
@@ -131,6 +132,7 @@ public class Grille extends JPanel  {
 
 		//	On place les cases à leur état actuel dans la grille
 		AfficherPlateau();
+		this.banniere.setMinesLeft(this.minesLeft);
     }
 
 	//	Méthode pour Génerer le plateau
@@ -246,5 +248,10 @@ public class Grille extends JPanel  {
 				}
 			}
 		}
+	}
+
+	//	Méthode qui renvoie la banniere d'état de la partie
+	public EtatPartie getBanniere(){
+		return this.banniere;
 	}
 }

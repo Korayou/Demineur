@@ -16,17 +16,16 @@ public class FrameJeu{
 		fenetre.setLayout(new GridBagLayout());
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
-		// Création de la bannière
-		EtatPartie banniere = new EtatPartie(mines);
-
 		//	Création de la grille de Jeu
-        Grille grille=new Grille(banniere,lignes,colonnes,mines);
+        Grille grille=new Grille(lignes,colonnes,mines);
+
+		// Récupération de la bannière
+		EtatPartie banniere = grille.getBanniere();
+
 
 
 		//	Mise en place de la bannière
 		Dimension grilleSize= grille.getGrilleSize();
-		Dimension banniereSize=new Dimension(grilleSize.width,grilleSize.height/8);
-		banniere.setSize(banniereSize);
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;
