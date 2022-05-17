@@ -10,6 +10,7 @@ public class Grille extends JPanel  {
 	private int taille;
 	private int mines;
 	private int minesLeft;
+	private boolean enJeu;
 
     // Définition du constructeur qui correspond à une grille de jeu
     public Grille(int lignes, int colonnes, int mines){
@@ -28,6 +29,7 @@ public class Grille extends JPanel  {
 		this.mines=mines;
 		this.minesLeft=mines;
 		this.banniere=banniere;
+		this.enJeu=true;
 		// On génère le plateau contenant les cases
 		GenererPlateau(caseSize);
 
@@ -253,5 +255,13 @@ public class Grille extends JPanel  {
 	//	Méthode qui renvoie la banniere d'état de la partie
 	public EtatPartie getBanniere(){
 		return this.banniere;
+	}
+	//	Méthode qui défini si la partie est en cours ou non 
+	public void setEnJeu(boolean enJeu){
+		this.enJeu=enJeu;
+	}
+	//	Méthode qui renvoie si la partie est en cours ou non 
+	public boolean getEnJeu(){
+		return this.enJeu;
 	}
 }

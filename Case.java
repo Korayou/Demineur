@@ -8,7 +8,6 @@ public class Case extends JPanel {
 	private boolean visible;
 	private boolean minee;
 	private boolean reperee;
-	private boolean enJeu;
 
 	//	Définition du constructeur
 	public Case(Grille grille, Dimension caseSize) {
@@ -17,7 +16,6 @@ public class Case extends JPanel {
 		this.visible=false;
 		this.reperee=false;	
 		this.grille=grille;
-		this.enJeu=true;
 		
 		//	On place un listener sur notre case pour qu'elle réagisse aux clicks du joueur
 		this.addMouseListener(new ListenerCase());
@@ -46,21 +44,21 @@ public class Case extends JPanel {
 				else if (this.entourage == 0) {
 					this.grille.setEntourageVisible(this);
 				}
-				if (this.enJeu){
+				if (this.grille.getEnJeu()){
 					this.grille.verifVictoire();
 				}
 			}
 			// 	S'il y a une mine et que c'est la première cliquée
-			else if ((this.minee)&&(this.enJeu)) {
-				System.out.println("Fin de partie première mine avant boum:"+this.enJeu);
-				this.enJeu=false;
-				System.out.println("Fin de partie première mine après boum:"+this.enJeu);
+			else if ((this.minee)&&(this.grille.getEnJeu())) {
+				System.out.println("En jeu première mine avant boum:"+this.grille.getEnJeu());
+				this.grille.setEnJeu(false);
+				System.out.println("En jeu première mine après boum:"+this.grille.getEnJeu());
 				this.setBackground(new Color(200, 0, 0));
 				this.grille.setAllVisible();
 			}
 			//	S'il y a une mine est que la partie est finie
-			if ((this.minee)&&(!this.enJeu)) {
-				System.out.println("Fin de partie autres mines:"+this.enJeu);
+			else if ((this.minee)&&(!this.grille.getEnJeu())) {
+				System.out.println("Fin de partie autres mines:"+this.grille.getEnJeu());
 				this.setBackground(new Color(236, 0, 140));
 
 			//	Sinon le nombre de mines autour d'elle
@@ -118,7 +116,7 @@ public class Case extends JPanel {
 
 	//	Methode pour montrer que la partie est gagnée
 	public void setVictoire(){
-		this.enJeu=false;
+		this.grille.setEnJeu(false);
 		if (this.minee==true){
 			removeAll();
 			this.setBackground(new Color(236, 214, 0));;
@@ -128,6 +126,8 @@ public class Case extends JPanel {
 
 	//	Methode pour savoir dans le Listener si la partie est finie ou non 
 	public boolean getEnJeu(){
-		return this.enJeu;
+		
+		System.out.println(this.grille.getEnJeu());
+		return this.grille.getEnJeu();
 	}
 }
