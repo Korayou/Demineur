@@ -16,11 +16,16 @@ public class FrameMenu{
 	    fenetre.setSize(frameWidth,frameHeight);
 	    fenetre.setLocation(frameLocation[0],frameLocation[1]);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JTextField fieldLignes = new JTextField();
+
+
 
 		// On crée un objet Fond pour habiller notre fenêtre
-		new Fond(fenetre);
-		
+		fenetre.add(new Fond(fenetre));
 
+		
+		//	On place les zones de textes pour récupérer les choix de l'utilisateur
+		fenetre.add(fieldLignes);
 
 		// A faire : choix de la taille de la grille, bouton jouer, charger et quitter, déscription/règles du jeu
 	    fenetre.setVisible(true);
