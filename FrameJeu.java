@@ -25,7 +25,6 @@ public class FrameJeu{
 
 
 		//	Mise en place de la bannière
-		Dimension grilleSize= grille.getGrilleSize();
 		miseEnPage.fill = GridBagConstraints.BOTH;
 		miseEnPage.gridx = 0;
     	miseEnPage.gridy = 0;
@@ -44,6 +43,7 @@ public class FrameJeu{
 
 		// Mise en place de la fenêtre et affichage
 		fenetre.pack();
+		Dimension grilleSize= grille.getGrilleSize();
 		fenetre.setSize(grilleSize.width,grilleSize.height*9/8);
 		Dimension fenetreSize=fenetre.getSize();
 		fenetre.setLocation(screenSize.width/2-(fenetreSize.width/2), screenSize.height/2-(fenetreSize.height/2));
