@@ -20,7 +20,7 @@ public class FrameJeu extends JFrame{
         Grille grille=new Grille(lignes,colonnes,mines);
 
 		// Récupération de la bannière
-		EtatPartie banniere = grille.getBanniere();
+		Banniere banniere = grille.getBanniere();
 
 
 

@@ -123,8 +123,6 @@ public class Case extends JPanel {
 
 	//	Methode pour savoir dans le Listener si la partie est finie ou non 
 	public boolean getEnJeu(){
-		
-		System.out.println(this.grille.getEnJeu());
 		return this.grille.getEnJeu();
 	}
 }

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Grille extends JPanel  {
-	private EtatPartie banniere;
+	private Banniere banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
 	private int colonnes;
@@ -20,7 +20,7 @@ public class Grille extends JPanel  {
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-		EtatPartie banniere = new EtatPartie(mines);
+		Banniere banniere = new Banniere(mines);
 		banniere.setSize(grilleSize.width,grilleSize.height/8);
 		this.setLayout(damier);
         this.setSize(grilleSize);
@@ -188,6 +188,7 @@ public class Grille extends JPanel  {
 		}
 		//	Lance la victoire si toutes les cases non minées sont révélées
 		if (taille-mines==casesVisibles){
+			System.out.println("Victoire !");
 			for (int i=0;i<taille;i++){
 				this.plateau[i].setVictoire();
 			}
@@ -256,7 +257,7 @@ public class Grille extends JPanel  {
 	}
 
 	//	Méthode qui renvoie la banniere d'état de la partie
-	public EtatPartie getBanniere(){
+	public Banniere getBanniere(){
 		return this.banniere;
 	}
 	//	Méthode qui défini si la partie est en cours ou non 

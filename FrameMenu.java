@@ -56,7 +56,7 @@ public class FrameMenu extends JFrame{
 
 		this.add(exit);
 
-		// A faire : Bouton charger
+		//TODO : Bouton charger
 	    this.setVisible(true);
 	}
 
