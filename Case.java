@@ -50,15 +50,12 @@ public class Case extends JPanel {
 			}
 			// 	S'il y a une mine et que c'est la première cliquée
 			else if ((this.minee)&&(this.grille.getEnJeu())) {
-				System.out.println("En jeu première mine avant boum:"+this.grille.getEnJeu());
 				this.grille.setEnJeu(false);
-				System.out.println("En jeu première mine après boum:"+this.grille.getEnJeu());
 				this.setBackground(new Color(200, 0, 0));
-				this.grille.setAllVisible();
+				this.grille.Defaite();
 			}
 			//	S'il y a une mine est que la partie est finie
 			else if ((this.minee)&&(!this.grille.getEnJeu())) {
-				System.out.println("Fin de partie autres mines:"+this.grille.getEnJeu());
 				this.setBackground(new Color(236, 0, 140));
 
 			//	Sinon le nombre de mines autour d'elle

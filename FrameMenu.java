@@ -1,9 +1,9 @@
 import javax.swing.*;
-
+import java.awt.event.*;
 import java.awt.*;
 
 // Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
-public class FrameMenu{
+public class FrameMenu extends JFrame{
 	private int lignes;
 	private int colonnes;
 	private int mines;
@@ -16,19 +16,19 @@ public class FrameMenu{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		// On crée ensuite notre fenêtre
-		JFrame fenetre = new JFrame("Démineur - Menu");
-	    fenetre.setSize(screenSize.width * 3/5,screenSize.height * 2/3);
-	    fenetre.setLocation(screenSize.width * 1/5, screenSize.height * 1/6);
-	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fenetre.setLayout(null);
-		fenetre.setLayout(new GridBagLayout());
+		this.setTitle("Démineur - Menu");
+	    this.setSize(screenSize.width * 3/5,screenSize.height * 2/3);
+	    this.setLocation(screenSize.width * 1/5, screenSize.height * 1/6);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(null);
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
 		
 		//	On créer les zones de textes de saisie
 		this.sliderLignes = new JSlider(4,30);
 		this.sliderColonnes = new JSlider(4,30);
-		this.sliderMines = new JSlider(0,900, 16);
+		this.sliderMines = new JSlider(1,900, 16);
 
 		sliderLignes.addChangeListener(new SettingsListener(0,this));
 		sliderColonnes.addChangeListener(new SettingsListener(1,this));
@@ -38,17 +38,26 @@ public class FrameMenu{
 		this.colonnes=sliderColonnes.getValue();
 		this.mines=sliderMines.getValue();
 		
-		fenetre.add(sliderLignes);
-		fenetre.add(sliderColonnes);
-		fenetre.add(sliderMines);
+		this.add(sliderLignes);
+		this.add(sliderColonnes);
+		this.add(sliderMines);
 		
 		JButton newGame = new JButton("New Game");
 		newGame.addActionListener(new NewGameListener(this));
 
-		fenetre.add(newGame);
+		this.add(newGame);
 
-		// A faire : bouton jouer, charger et quitter
-	    fenetre.setVisible(true);
+		JButton exit = new JButton("Quitter");
+		exit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		this.add(exit);
+
+		// A faire : Bouton charger
+	    this.setVisible(true);
 	}
 
 	//	Méthode pour récupérer les valeurs des paramètres
@@ -61,7 +70,6 @@ public class FrameMenu{
 			this.mines=settingValue;
 		}
 		this.sliderMines.setMaximum(this.colonnes*this.lignes);
-		System.out.println("Lignes : "+this.lignes+" Colonnes : "+this.colonnes+" Mines : "+this.mines);
     }
 
 	// 	Methode pour connaître les paramètres de la partie

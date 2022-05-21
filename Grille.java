@@ -152,11 +152,13 @@ public class Grille extends JPanel  {
   		}
 	}
 
-	//	Méthode pour montrer toutes les cases à la fin de la partie
-	public void setAllVisible(){
+	//	Méthode montrer la défaite
+	public void Defaite(){
+		//	Montre toutes les cases du plateau
 		for (int i=0;i<this.taille;i++){
 			this.plateau[i].setVisible();
   		}
+		System.out.println("Défaite !");
 	}
 
 	//	Méthode pour obtenir la taille de la grille de jeu
@@ -177,13 +179,14 @@ public class Grille extends JPanel  {
 
 	// 	Méthode déterminant les conditions de victoire
 	public void verifVictoire(){
+		// 	Compte le nombre de cases visibles
 		int casesVisibles=0;
 		for (int i=0;i<this.taille;i++){
 			if(plateau[i].getVisible()==true){
 				casesVisibles+=1;
 			}
 		}
-		//	Lance la victoire si les conditions sont remplies
+		//	Lance la victoire si toutes les cases non minées sont révélées
 		if (taille-mines==casesVisibles){
 			for (int i=0;i<taille;i++){
 				this.plateau[i].setVictoire();
