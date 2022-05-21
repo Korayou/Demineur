@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Banniere extends JPanel {
 	private FrameJeu fenetre;
@@ -26,17 +25,17 @@ public class Banniere extends JPanel {
 	public void setVictoire(){
 		this.add(new Fin("Victoire !",this.getSize()));
 		this.repaint();
-		JButton menu = new JButton("Revenir au menu");
-		menu.addActionListener(new MenuListener(this.fenetre));
-		this.add(menu);
+		//	TODO : délai
+		new FrameMenu();
+        this.fenetre.dispose();
 	}
 
 	//	Méthode pour indiquer au joueur sa Défaite
 	public void setDefaite(){
 		this.add(new Fin("Défaite !",this.getSize()));
 		this.repaint();
-		JButton menu = new JButton("Revenir au menu");
-		menu.addActionListener(new MenuListener(this.fenetre));
-		this.add(menu);
+		//	TODO : délai
+		new FrameMenu();
+        this.fenetre.dispose();
 	}
 }

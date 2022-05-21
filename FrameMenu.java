@@ -26,9 +26,9 @@ public class FrameMenu extends JFrame{
 
 		
 		//	On créer les zones de textes de saisie
-		this.sliderLignes = new JSlider(4,30);
-		this.sliderColonnes = new JSlider(4,30);
-		this.sliderMines = new JSlider(1,900, 16);
+		this.sliderLignes = new JSlider(4,30,20);
+		this.sliderColonnes = new JSlider(4,30,25);
+		this.sliderMines = new JSlider(1,900, 50);
 
 		sliderLignes.addChangeListener(new SettingsListener(0,this));
 		sliderColonnes.addChangeListener(new SettingsListener(1,this));
