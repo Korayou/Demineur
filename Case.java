@@ -125,4 +125,7 @@ public class Case extends JPanel {
 	public boolean getEnJeu(){
 		return this.grille.getEnJeu();
 	}
+
+	//	TODO : Override toString() pour avoir 3 bits désignants l'état de la case
+	//
 }

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Grille extends JPanel  {
+public class Grille extends JPanel{
 	private Banniere banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
@@ -11,6 +11,9 @@ public class Grille extends JPanel  {
 	private int mines;
 	private int minesLeft;
 	private boolean enJeu;
+
+	// TODO : entourage dans une méthode
+	// TODO : Recréer un tableau avec les cases minees
 
     // Définition du constructeur qui correspond à une grille de jeu
     public Grille(int lignes, int colonnes, int mines){
@@ -159,6 +162,7 @@ public class Grille extends JPanel  {
 			this.plateau[i].setVisible();
   		}
 		System.out.println("Défaite !");
+		this.banniere.setDefaite();
 	}
 
 	//	Méthode pour obtenir la taille de la grille de jeu
@@ -188,10 +192,11 @@ public class Grille extends JPanel  {
 		}
 		//	Lance la victoire si toutes les cases non minées sont révélées
 		if (taille-mines==casesVisibles){
-			System.out.println("Victoire !");
 			for (int i=0;i<taille;i++){
 				this.plateau[i].setVictoire();
 			}
+			System.out.println("Victoire !");
+			this.banniere.setVictoire();
 		}
 	}
 
