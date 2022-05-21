@@ -3,9 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Banniere extends JPanel {
+	private FrameJeu fenetre;
 	//	Définition du constructeur
-	public Banniere(int mines) {
+	public Banniere(int mines, FrameJeu fenetre) {
 		super();
+		this.fenetre=fenetre;
 
         //  On défini un style à la bannière
 		this.setBackground( new Color(0, 236, 96));
@@ -25,11 +27,7 @@ public class Banniere extends JPanel {
 		this.add(new Fin("Victoire !",this.getSize()));
 		this.repaint();
 		JButton menu = new JButton("Revenir au menu");
-		menu.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				new FrameMenu();
-			}
-		});
+		menu.addActionListener(new MenuListener(this.fenetre));
 		this.add(menu);
 	}
 
@@ -38,11 +36,7 @@ public class Banniere extends JPanel {
 		this.add(new Fin("Défaite !",this.getSize()));
 		this.repaint();
 		JButton menu = new JButton("Revenir au menu");
-		menu.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				new FrameMenu();
-			}
-		});
+		menu.addActionListener(new MenuListener(this.fenetre));
 		this.add(menu);
 	}
 }

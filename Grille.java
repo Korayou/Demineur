@@ -11,28 +11,31 @@ public class Grille extends JPanel{
 	private int mines;
 	private int minesLeft;
 	private boolean enJeu;
+	private FrameJeu fenetre;
 
 	// TODO : entourage dans une méthode
 	// TODO : Recréer un tableau avec les cases minees
 
     // Définition du constructeur qui correspond à une grille de jeu
-    public Grille(int lignes, int colonnes, int mines){
-		
+    public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre){
+		super();
+		this.colonnes=colonnes;
+		this.taille=lignes*colonnes;
+		this.mines=mines;
+		this.minesLeft=mines;
+		this.enJeu=true;
+		this.fenetre=fenetre;
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-		Banniere banniere = new Banniere(mines);
+		Banniere banniere = new Banniere(mines,this.fenetre);
+		this.banniere=banniere;
 		banniere.setSize(grilleSize.width,grilleSize.height/8);
 		this.setLayout(damier);
         this.setSize(grilleSize);
-		this.colonnes=colonnes;
-		this.taille=lignes*colonnes;
-		this.mines=mines;
-		this.minesLeft=mines;
-		this.banniere=banniere;
-		this.enJeu=true;
+		
 		// On génère le plateau contenant les cases
 		GenererPlateau(caseSize);
 

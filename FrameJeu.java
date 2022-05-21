@@ -17,7 +17,7 @@ public class FrameJeu extends JFrame{
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
 		//	Création de la grille de Jeu
-        Grille grille=new Grille(lignes,colonnes,mines);
+        Grille grille=new Grille(lignes,colonnes,mines,this);
 
 		// Récupération de la bannière
 		Banniere banniere = grille.getBanniere();
