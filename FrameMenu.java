@@ -61,7 +61,7 @@ public class FrameMenu extends JFrame{
 		this.add(showColumns);
 		this.add(showMines);
 		
-		JButton newGame = new JButton("New Game");
+		JButton newGame = new JButton("Jouer");
 		newGame.addActionListener(new NewGameListener(this));
 
 		newGame.setBounds(frameSize.width*3/5, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);;

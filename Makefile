@@ -38,7 +38,7 @@ MineLeft.class : MineLeft.java
 Fin.class : Fin.java
 	${JC} ${JCFLAGS} Fin.java
 
-MenuListener.class : MenuListener.java FrameMenu.class
+MenuListener.class : MenuListener.java
 	${JC} ${JCFLAGS} MenuListener.java
 
 ListenerCase.class : ListenerCase.java Etoile.class Doute.class

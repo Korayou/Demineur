@@ -17,7 +17,7 @@ public class Grille extends JPanel{
 	// TODO : Recréer un tableau avec les cases minees
 
     // Définition du constructeur qui correspond à une grille de jeu
-    public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre){
+    public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre, FrameMenu menu){
 		super();
 		this.colonnes=colonnes;
 		this.taille=lignes*colonnes;
@@ -30,7 +30,7 @@ public class Grille extends JPanel{
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-		Banniere banniere = new Banniere(mines,this.fenetre);
+		Banniere banniere = new Banniere(mines,this.fenetre, menu);
 		this.banniere=banniere;
 		banniere.setSize(grilleSize.width,grilleSize.height/8);
 		this.setLayout(damier);

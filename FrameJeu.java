@@ -3,7 +3,7 @@ import java.awt.*;
 
 // Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
 public class FrameJeu extends JFrame{
-	public FrameJeu(int lignes, int colonnes, int mines) {
+	public FrameJeu(int lignes, int colonnes, int mines, FrameMenu menu) {
 
 		// On récupère les dimensions de l'écran pour adapter la taille par défaut de notre fenêtre
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -17,7 +17,7 @@ public class FrameJeu extends JFrame{
 		GridBagConstraints miseEnPage = new GridBagConstraints();
 
 		//	Création de la grille de Jeu
-        Grille grille=new Grille(lignes,colonnes,mines,this);
+        Grille grille=new Grille(lignes,colonnes,mines,this, menu);
 
 		// Récupération de la bannière
 		Banniere banniere = grille.getBanniere();
