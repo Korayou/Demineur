@@ -158,16 +158,6 @@ public class Grille extends JPanel{
   		}
 	}
 
-	//	Méthode montrer la défaite
-	public void Defaite(){
-		//	Montre toutes les cases du plateau
-		for (int i=0;i<this.taille;i++){
-			this.plateau[i].setVisible();
-  		}
-		System.out.println("Défaite !");
-		this.banniere.setDefaite();
-	}
-
 	//	Méthode pour obtenir la taille de la grille de jeu
     public Dimension getGrilleSize(){
         return grilleSize;
@@ -197,10 +187,20 @@ public class Grille extends JPanel{
 		if (taille-mines==casesVisibles){
 			for (int i=0;i<taille;i++){
 				this.plateau[i].setVictoire();
+				System.out.println("Victoire !");
 			}
-			System.out.println("Victoire !");
 			this.banniere.setVictoire();
 		}
+	}
+
+	//	Méthode montrer la défaite
+	public void Defaite(){
+		//	Montre toutes les cases du plateau
+		for (int i=0;i<this.taille;i++){
+			this.plateau[i].setVisible();
+			System.out.println("Défaite !");
+		}
+		this.banniere.setDefaite();
 	}
 
 	//	Methode pour récupérer le plateau de jeu

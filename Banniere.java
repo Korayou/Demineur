@@ -25,7 +25,11 @@ public class Banniere extends JPanel {
 	public void setVictoire(){
 		this.add(new Fin("Victoire !",this.getSize()));
 		this.repaint();
-		//	TODO : délai
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e){
+			System.out.println("oops you didn't see the end");
+		}
 		new FrameMenu();
         this.fenetre.dispose();
 	}
@@ -34,7 +38,11 @@ public class Banniere extends JPanel {
 	public void setDefaite(){
 		this.add(new Fin("Défaite !",this.getSize()));
 		this.repaint();
-		//	TODO : délai
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e){
+			System.out.println("oops you didn't see the end");
+		}
 		new FrameMenu();
         this.fenetre.dispose();
 	}

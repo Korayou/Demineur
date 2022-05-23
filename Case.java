@@ -100,9 +100,6 @@ public class Case extends JPanel {
 	//	Méthode pour savoir si le joueur pense que la case est minée
 	public void setReperee(boolean reperee){
 		this.reperee=reperee;
-		if ((reperee)&&(minee)){
-			this.grille.verifVictoire();
-		}
 		this.grille.MinesLeft();
 	}
 
@@ -117,7 +114,7 @@ public class Case extends JPanel {
 		if (this.minee==true){
 			removeAll();
 			this.setBackground(new Color(236, 214, 0));;
-			
+			this.updateUI();
 		}
 	}
 
