@@ -201,7 +201,7 @@ public class Grille extends JPanel{
 			System.out.println("Défaite !");
 		}
 		this.banniere.setDefaite();
-	}
+		}
 
 	//	Methode pour récupérer le plateau de jeu
 	public Case[] getPlateau(){

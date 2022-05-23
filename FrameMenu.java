@@ -10,6 +10,10 @@ public class FrameMenu extends JFrame{
 	private JSlider sliderLignes;
 	private JSlider sliderColonnes;
 	private JSlider sliderMines;
+	private JLabel showLines;
+	private JLabel showColumns;
+	private JLabel showMines;
+
 	public FrameMenu() {
 
 		// On récupère les dimensions de l'écran pour adapter la taille de notre fenêtre
@@ -41,6 +45,16 @@ public class FrameMenu extends JFrame{
 		this.add(sliderLignes);
 		this.add(sliderColonnes);
 		this.add(sliderMines);
+
+		this.showLines= new JLabel("Lignes : 20");
+		this.showColumns= new JLabel("Colonnes : 25");
+		this.showMines= new JLabel("Mines : 50");
+
+		this.add(showLines);
+		this.add(showColumns);
+		this.add(showMines);
+
+		// TODO : placer des JLabel pour montrer la valeur
 		
 		JButton newGame = new JButton("New Game");
 		newGame.addActionListener(new NewGameListener(this));
@@ -60,14 +74,17 @@ public class FrameMenu extends JFrame{
 	    this.setVisible(true);
 	}
 
-	//	Méthode pour récupérer les valeurs des paramètres
+	//	Méthode pour récupérer les valeurs des paramètres et les afficher à l'écran
 	public void setSettings(int settingToSet, int settingValue){
 		if (settingToSet==0){
 			this.lignes=settingValue;
+			showLines.setText("Lignes : "+settingValue);
 		} else if (settingToSet==1){
 			this.colonnes=settingValue;
+			showColumns.setText("Colonnes : "+settingValue);
 		} else if (settingToSet==2){
 			this.mines=settingValue;
+			showMines.setText("Mines : "+settingValue);
 		}
 		this.sliderMines.setMaximum(this.colonnes*this.lignes);
     }

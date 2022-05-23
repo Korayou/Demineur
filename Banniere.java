@@ -26,7 +26,7 @@ public class Banniere extends JPanel {
 		this.add(new Fin("Victoire !",this.getSize()));
 		this.repaint();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e){
 			System.out.println("oops you didn't see the end");
 		}
@@ -37,9 +37,8 @@ public class Banniere extends JPanel {
 	//	Méthode pour indiquer au joueur sa Défaite
 	public void setDefaite(){
 		this.add(new Fin("Défaite !",this.getSize()));
-		this.repaint();
-		try {
-			Thread.sleep(10000);
+		this.repaint();try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e){
 			System.out.println("oops you didn't see the end");
 		}
