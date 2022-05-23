@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Banniere extends JPanel {
 	private FrameJeu fenetre;
@@ -25,24 +26,19 @@ public class Banniere extends JPanel {
 	public void setVictoire(){
 		this.add(new Fin("Victoire !",this.getSize()));
 		this.repaint();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e){
-			System.out.println("oops you didn't see the end");
-		}
-		new FrameMenu();
-        this.fenetre.dispose();
+  		ActionListener backToMenu = new MenuListener(this.fenetre);
+  		Timer timerMenu = new Timer(5000, backToMenu);
+  		timerMenu.setRepeats(false);
+		timerMenu.start();
 	}
 
 	//	Méthode pour indiquer au joueur sa Défaite
 	public void setDefaite(){
 		this.add(new Fin("Défaite !",this.getSize()));
-		this.repaint();try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e){
-			System.out.println("oops you didn't see the end");
-		}
-		new FrameMenu();
-        this.fenetre.dispose();
+		this.repaint();
+  		ActionListener backToMenu = new MenuListener(this.fenetre);
+  		Timer timerMenu = new Timer(5000, backToMenu);
+  		timerMenu.setRepeats(false);
+  		timerMenu.start();
 	}
 }

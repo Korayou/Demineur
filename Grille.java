@@ -187,7 +187,6 @@ public class Grille extends JPanel{
 		if (taille-mines==casesVisibles){
 			for (int i=0;i<taille;i++){
 				this.plateau[i].setVictoire();
-				System.out.println("Victoire !");
 			}
 			this.banniere.setVictoire();
 		}
@@ -198,7 +197,6 @@ public class Grille extends JPanel{
 		//	Montre toutes les cases du plateau
 		for (int i=0;i<this.taille;i++){
 			this.plateau[i].setVisible();
-			System.out.println("Défaite !");
 		}
 		this.banniere.setDefaite();
 		}
