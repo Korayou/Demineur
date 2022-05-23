@@ -21,12 +21,11 @@ public class FrameMenu extends JFrame{
 
 		// On crée ensuite notre fenêtre
 		this.setTitle("Démineur - Menu");
-	    this.setSize(screenSize.width * 3/5,screenSize.height * 2/3);
+		Dimension frameSize = new Dimension (screenSize.width * 3/5,screenSize.height * 2/3);
+	    this.setSize(frameSize);
 	    this.setLocation(screenSize.width * 1/5, screenSize.height * 1/6);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints miseEnPage = new GridBagConstraints();
 
 		
 		//	On créer les zones de textes de saisie
@@ -42,6 +41,10 @@ public class FrameMenu extends JFrame{
 		this.colonnes=sliderColonnes.getValue();
 		this.mines=sliderMines.getValue();
 		
+		sliderLignes.setBounds(frameSize.width*2/3, frameSize.height*6/15, frameSize.width/4, frameSize.height/20);
+		sliderColonnes.setBounds(frameSize.width*2/3, frameSize.height*8/15, frameSize.width/4, frameSize.height/20);
+		sliderMines.setBounds(frameSize.width*2/3, frameSize.height*10/15, frameSize.width/4, frameSize.height/20);
+
 		this.add(sliderLignes);
 		this.add(sliderColonnes);
 		this.add(sliderMines);
@@ -50,15 +53,18 @@ public class FrameMenu extends JFrame{
 		this.showColumns= new JLabel("Colonnes : 25");
 		this.showMines= new JLabel("Mines : 50");
 
+		this.showLines.setBounds(frameSize.width*2/3, frameSize.height*7/15, frameSize.width/4, frameSize.height/20);
+		this.showColumns.setBounds(frameSize.width*2/3, frameSize.height*9/15, frameSize.width/4, frameSize.height/20);
+		this.showMines.setBounds(frameSize.width*2/3, frameSize.height*11/15, frameSize.width/4, frameSize.height/20);
+
 		this.add(showLines);
 		this.add(showColumns);
 		this.add(showMines);
-
-		// TODO : placer des JLabel pour montrer la valeur
 		
 		JButton newGame = new JButton("New Game");
 		newGame.addActionListener(new NewGameListener(this));
 
+		newGame.setBounds(frameSize.width*3/5, frameSize.height*12/15, frameSize.width/8, frameSize.height/15);;
 		this.add(newGame);
 
 		JButton exit = new JButton("Quitter");
@@ -68,6 +74,7 @@ public class FrameMenu extends JFrame{
 			}
 		});
 
+		exit.setBounds(frameSize.width/10, frameSize.height*12/15, frameSize.width/8, frameSize.height/15);
 		this.add(exit);
 
 		//TODO : Bouton charger
