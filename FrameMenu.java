@@ -15,6 +15,7 @@ public class FrameMenu extends JFrame{
 	private JLabel showMines;
 
 	public FrameMenu() {
+		super();
 
 		// On récupère les dimensions de l'écran pour adapter la taille de notre fenêtre
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -26,9 +27,15 @@ public class FrameMenu extends JFrame{
 	    this.setLocation(screenSize.width * 3/10, screenSize.height * 1/6);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
+		this.getContentPane().setBackground( new Color(0, 236, 96));
 
+		//	Ajout du titre
+		JLabel titre = new JLabel("Démineur");
+		titre.setFont(new Font("Rockwell", Font.PLAIN, 45));
+		titre.setBounds((frameSize.width/3), frameSize.height/15,frameSize.width/2,frameSize.height*2/15);
+		this.add(titre);
 		
-		//	On créer les zones de textes de saisie
+		//	On créer les sliders et les JLabel qui afficheront leur valeur
 		this.sliderLignes = new JSlider(4,30,20);
 		this.sliderColonnes = new JSlider(4,30,25);
 		this.sliderMines = new JSlider(1,900, 50);
@@ -41,9 +48,9 @@ public class FrameMenu extends JFrame{
 		this.colonnes=sliderColonnes.getValue();
 		this.mines=sliderMines.getValue();
 		
-		sliderLignes.setBounds(frameSize.width*3/5, frameSize.height*6/15, frameSize.width/3, frameSize.height/20);
-		sliderColonnes.setBounds(frameSize.width*3/5, frameSize.height*8/15, frameSize.width/3, frameSize.height/20);
-		sliderMines.setBounds(frameSize.width*3/5, frameSize.height*10/15, frameSize.width/3, frameSize.height/20);
+		sliderLignes.setBounds(frameSize.width/3, frameSize.height*5/15, frameSize.width/3, frameSize.height/20);
+		sliderColonnes.setBounds(frameSize.width/3, frameSize.height*7/15, frameSize.width/3, frameSize.height/20);
+		sliderMines.setBounds(frameSize.width/3, frameSize.height*9/15, frameSize.width/3, frameSize.height/20);
 
 		this.add(sliderLignes);
 		this.add(sliderColonnes);
@@ -53,9 +60,9 @@ public class FrameMenu extends JFrame{
 		this.showColumns= new JLabel("Colonnes : 25");
 		this.showMines= new JLabel("Mines : 50");
 
-		this.showLines.setBounds(frameSize.width*3/5, frameSize.height*5/15, frameSize.width/3, frameSize.height/20);
-		this.showColumns.setBounds(frameSize.width*3/5, frameSize.height*7/15, frameSize.width/3, frameSize.height/20);
-		this.showMines.setBounds(frameSize.width*3/5, frameSize.height*9/15, frameSize.width/3, frameSize.height/20);
+		this.showLines.setBounds(frameSize.width/3, frameSize.height*4/15, frameSize.width/3, frameSize.height/20);
+		this.showColumns.setBounds(frameSize.width/3, frameSize.height*6/15, frameSize.width/3, frameSize.height/20);
+		this.showMines.setBounds(frameSize.width/3, frameSize.height*8/15, frameSize.width/3, frameSize.height/20);
 
 		this.add(showLines);
 		this.add(showColumns);
@@ -64,7 +71,7 @@ public class FrameMenu extends JFrame{
 		JButton newGame = new JButton("Jouer");
 		newGame.addActionListener(new NewGameListener(this));
 
-		newGame.setBounds(frameSize.width*3/5, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);;
+		newGame.setBounds(frameSize.width*10/15, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);;
 		this.add(newGame);
 
 		JButton exit = new JButton("Quitter");
