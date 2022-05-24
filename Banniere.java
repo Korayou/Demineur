@@ -18,7 +18,7 @@ public class Banniere extends JPanel {
 
 		//	Bouton pour sauver et quitter
 		this.save = new JButton("Sauver et quitter");
-		//save.addActionListener(new SaveListener(grille));
+		save.addActionListener(new SaveListener(grille, fenetre));
 		this.add(this.save, BorderLayout.EAST);
 	}
 

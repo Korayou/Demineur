@@ -22,7 +22,7 @@ public class FrameJeu extends JFrame{
 		// Récupération de la bannière
 		Banniere banniere = grille.getBanniere();
 
-
+		this.addWindowListener(new SaveAndCloseListener(grille));
 
 		//	Mise en place de la bannière
 		miseEnPage.fill = GridBagConstraints.BOTH;
