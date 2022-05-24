@@ -123,6 +123,18 @@ public class Case extends JPanel {
 		return this.grille.getEnJeu();
 	}
 
-	//	TODO : Override toString() pour avoir 3 bits désignants l'état de la case
-	//
+	@Override
+	public String toString(){
+    	int value=0;
+    	if (this.minee){
+      		value+=1;
+    	}
+    	if (this.reperee){
+      		value+=2;
+    	}
+     	if (this.visible){
+      		value+=4;
+    	}
+    	return Integer.toString(value);
+	}
 }

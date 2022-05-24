@@ -5,10 +5,11 @@ public class Banniere extends JPanel {
 	private FrameJeu fenetre;
 	private FrameMenu menu;
 	//	Définition du constructeur
-	public Banniere(int mines, FrameJeu fenetre, FrameMenu menu) {
+	public Banniere(int mines, FrameJeu fenetre, FrameMenu menu, Dimension grilleSize) {
 		super();
 		this.fenetre=fenetre;
 		this.menu=menu;
+		this.setSize(grilleSize.width,grilleSize.height/8);
 
         //  On défini un style à la bannière
 		this.setBackground(new Color(0, 236, 96));

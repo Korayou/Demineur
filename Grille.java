@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
+import java.util.Arrays;
 
 public class Grille extends JPanel{
 	private Banniere banniere;
     private Dimension grilleSize=new Dimension(0,0);
 	private Case[] plateau;
 	private int colonnes;
+	private int lignes;
 	private int taille;
 	private int mines;
 	private int minesLeft;
@@ -20,6 +22,7 @@ public class Grille extends JPanel{
     public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre, FrameMenu menu){
 		super();
 		this.colonnes=colonnes;
+		this.lignes=lignes;
 		this.taille=lignes*colonnes;
 		this.mines=mines;
 		this.minesLeft=mines;
@@ -30,9 +33,8 @@ public class Grille extends JPanel{
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-		Banniere banniere = new Banniere(mines,this.fenetre, menu);
+		Banniere banniere = new Banniere(mines,this.fenetre, menu, grilleSize);
 		this.banniere=banniere;
-		banniere.setSize(grilleSize.width,grilleSize.height/8);
 		this.setLayout(damier);
         this.setSize(grilleSize);
 		
@@ -203,7 +205,13 @@ public class Grille extends JPanel{
 
 	//	Methode pour récupérer le plateau de jeu
 	public Case[] getPlateau(){
-		return this.plateau;
+		return Arrays.copyOf(this.plateau,this.taille);
+	}
+
+	//	Méthode pour récupérer le nombre de lignes
+	public Dimension getDimensionGrille(){
+		Dimension grilleSize= new Dimension(this.colonnes, this.lignes);
+		return grilleSize;
 	}
 
 	//	Méthode pour rendre visibles les cases autour d'un 0
