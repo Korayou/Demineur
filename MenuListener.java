@@ -6,6 +6,8 @@ public class MenuListener implements ActionListener{
         this.fenetre=fenetre;
         this.menu=menu;
     }
+    
+    @Override
     public void actionPerformed(ActionEvent event){
         this.menu.setVisible(true);
         this.fenetre.dispose();

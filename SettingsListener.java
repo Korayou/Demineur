@@ -10,6 +10,8 @@ public class SettingsListener implements ChangeListener{
         this.settingToSet=settingToSet;
         this.menu=menu;
     }
+
+    @Override
     public void stateChanged(ChangeEvent evenement) {
         JSlider slider = (JSlider) evenement.getSource();
         settingValue=slider.getValue();

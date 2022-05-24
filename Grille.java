@@ -33,7 +33,7 @@ public class Grille extends JPanel{
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
 		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
 	    GridLayout damier = new GridLayout(lignes,colonnes);
-		Banniere banniere = new Banniere(mines,this.fenetre, menu, grilleSize);
+		Banniere banniere = new Banniere(mines,this.fenetre, menu, this);
 		this.banniere=banniere;
 		this.setLayout(damier);
         this.setSize(grilleSize);
