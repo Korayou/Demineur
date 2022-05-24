@@ -26,14 +26,11 @@ FrameJeu.class : FrameJeu.java Grille.class
 Grille.class : Grille.java Banniere.class Case.class
 	${JC} ${JCFLAGS} Grille.java
 
-Banniere.class : Banniere.java MenuListener.class Fin.class
+Banniere.class : Banniere.java MenuListener.class
 	${JC} ${JCFLAGS} Banniere.java
 
 Case.class : Case.java ListenerCase.class Entourage.class
 	${JC} ${JCFLAGS} Case.java
-
-Fin.class : Fin.java
-	${JC} ${JCFLAGS} Fin.java
 
 MenuListener.class : MenuListener.java
 	${JC} ${JCFLAGS} MenuListener.java

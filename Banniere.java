@@ -14,13 +14,19 @@ public class Banniere extends JPanel {
         //  On défini un style à la bannière
 		this.setBackground(new Color(0, 236, 96));
 
-		// TODO : Bouton sauver et quitter
+		//	Bouton pour sauver et quitter
+		JButton save = new JButton("Sauver et quitter");
+		//save.addActionListener(new SaveListener());
+		this.add(save, BorderLayout.EAST);
+		System.out.println(save.getLocation());
 	}
 
 	//	Méthode pour afficher le nombre de mines restantes
 	public void setMinesLeft(int minesLeft) {
-		this.removeAll();
-		this.add(new JLabel("Mines restantes : "+Integer.toString(minesLeft)),BorderLayout.CENTER);
+		JLabel mines = new JLabel("Mines restantes : "+Integer.toString(minesLeft));
+		Dimension prefSize = new Dimension(this.getWidth()/2,this.getHeight()/5);
+		mines.setPreferredSize(prefSize);
+		this.add(mines,BorderLayout.NORTH);
 		this.repaint();
 	}
 
@@ -28,8 +34,9 @@ public class Banniere extends JPanel {
 	public void setVictoire() {
 		JLabel victoire = new JLabel("Victoire !   Retour au menu...");
 		victoire.setForeground(new Color(0, 22, 236));
-		this.add(victoire,BorderLayout.SOUTH);
-  		Timer timerMenu = new Timer(5000, new MenuListener(this.fenetre, this.menu));
+		victoire.setFont(new Font("Arial", Font.PLAIN, 30));
+		this.add(victoire,BorderLayout.CENTER);
+  		Timer timerMenu = new Timer(7000, new MenuListener(this.fenetre, this.menu));
   		timerMenu.setRepeats(false);
 		timerMenu.start();
 	}
@@ -38,8 +45,9 @@ public class Banniere extends JPanel {
 	public void setDefaite() {
 		JLabel defaite = new JLabel("Défaite !   Retour au menu...");
 		defaite.setForeground(new Color(0, 22, 236));
-		this.add(defaite,BorderLayout.SOUTH);
-		Timer timerMenu = new Timer(5000, new MenuListener(this.fenetre, this.menu));
+		defaite.setFont(new Font("Arial", Font.PLAIN, 30));
+		this.add(defaite,BorderLayout.CENTER);
+		Timer timerMenu = new Timer(7000, new MenuListener(this.fenetre, this.menu));
   		timerMenu.setRepeats(false);
   		timerMenu.start();
 	}
