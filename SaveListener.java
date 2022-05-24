@@ -11,7 +11,6 @@ public class SaveListener implements ActionListener {
     public void actionPerformed(ActionEvent event){
         SaveManager saveManager = new SaveManager();
         saveManager.save(this.grille, "Save.txt");
-        SaveManager.SaveData donnees = saveManager.load("Save.txt");
         this.fenetre.dispose();
     }
 }

@@ -49,6 +49,9 @@ public class SaveManager {
             e.printStackTrace();
         }
 
+        File save = new File(nomFichier);
+        save.delete();
+
         toRet.cases=toReturn;
         toRet.taille=dimension;
         return toRet;

@@ -13,7 +13,6 @@ public class SaveAndCloseListener implements WindowListener{
     public void windowClosing(WindowEvent e) {
         SaveManager saveManager = new SaveManager();
         saveManager.save(this.grille, "Save.txt");
-        SaveManager.SaveData donnees = saveManager.load("Save.txt");
         
     }
 

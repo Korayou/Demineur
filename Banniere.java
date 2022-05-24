@@ -5,6 +5,7 @@ public class Banniere extends JPanel {
 	private FrameJeu fenetre;
 	private FrameMenu menu;
 	private JButton save;
+	private JLabel mines;
 	//	Définition du constructeur
 	public Banniere(int mines, FrameJeu fenetre, FrameMenu menu, Grille grille) {
 		super();
@@ -16,6 +17,11 @@ public class Banniere extends JPanel {
 		this.setBackground(new Color(0, 236, 96));
 		this.setLayout(new BorderLayout());
 
+		//	Compteur de mines restantes
+
+		this.mines= new JLabel();
+		this.add(this.mines, BorderLayout.NORTH);
+
 		//	Bouton pour sauver et quitter
 		this.save = new JButton("Sauver et quitter");
 		save.addActionListener(new SaveListener(grille, fenetre));
@@ -24,8 +30,7 @@ public class Banniere extends JPanel {
 
 	//	Méthode pour afficher le nombre de mines restantes
 	public void setMinesLeft(int minesLeft) {
-		JLabel mines = new JLabel("Mines restantes : "+Integer.toString(minesLeft));
-		this.add(mines, BorderLayout.NORTH);
+		this.mines.setText("Mines restantes : "+Integer.toString(minesLeft));
 		this.repaint();
 	}
 

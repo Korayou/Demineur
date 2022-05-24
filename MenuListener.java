@@ -10,6 +10,8 @@ public class MenuListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent event){
         this.menu.setVisible(true);
+        WindowListener[] wl= this.fenetre.getWindowListeners();
+        this.fenetre.removeWindowListener(wl[0]);
         this.fenetre.dispose();
     }
 }

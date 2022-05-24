@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 import java.awt.*;
 
 // Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
@@ -71,7 +72,7 @@ public class FrameMenu extends JFrame{
 		JButton newGame = new JButton("Jouer");
 		newGame.addActionListener(new NewGameListener(this));
 
-		newGame.setBounds(frameSize.width*10/15, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);;
+		newGame.setBounds(frameSize.width*7/10, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);;
 		this.add(newGame);
 
 		JButton exit = new JButton("Quitter");
@@ -83,8 +84,15 @@ public class FrameMenu extends JFrame{
 
 		exit.setBounds(frameSize.width/10, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);
 		this.add(exit);
+		
+		File save = new File("Save.txt");
+		if(save.exists()){
+			JButton charger = new JButton("Charger");
+			charger.addActionListener(new Chargement(this));
+			charger.setBounds(frameSize.width*4/10, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);
+			this.add(charger);
+		}
 
-		//TODO : Bouton charger
 		this.setResizable(false);
 	    this.setVisible(true);
 	}
