@@ -2,20 +2,62 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 import java.util.Arrays;
-
+/**
+* La classe <code>Grille</code> correspond à une grille de jeu
+* elle genère un tableau de case et une Bannière
+* @version 1.1
+* @author Kayyissa Haïssous
+*/
 public class Grille extends JPanel{
+	/**
+	* Banniere
+	*/
 	private Banniere banniere;
+	/**
+	* Dimension de la grille
+	*/
     private Dimension grilleSize=new Dimension(0,0);
+    /**
+	* tableau des cases de la partie
+	*/
 	private Case[] plateau;
+	/**
+	* nombre de colonnes
+	*/
 	private int colonnes;
+	/**
+	* nombre de lignes
+	*/
 	private int lignes;
+	/**
+	* nombre de cases
+	*/
 	private int taille;
+	/**
+	* nombre de mines
+	*/
 	private int mines;
+	/**
+	* nombre de mines restantes à trouver
+	*/
 	private int minesLeft;
+	/**
+	* statut si la partie est en cours ou non
+	*/
 	private boolean enJeu;
+	/**
+	* fenetre de Jeu
+	*/
 	private FrameJeu fenetre;
 
-    // Définition du constructeur qui correspond à une nouvelle grille de jeu
+	/**
+	* Définition du constructeur qui correspond à une nouvelle grille de jeu
+	* @param lignes nombre de lignes
+	* @param colonnes nombre de colonnes
+	* @param mines nombre de mines
+	* @param fenetre fenetre de Jeu
+	* @param menu fenetre du menu rattaché 
+	*/
     public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre, FrameMenu menu){
 		super();
 		this.colonnes=colonnes;
@@ -77,6 +119,15 @@ public class Grille extends JPanel{
     }
 
 
+    /**
+	* Définition du constructeur qui correspond au chargement d'une grille sauvegardé
+	* @param lignes nombre de lignes
+	* @param colonnes nombre de colonnes
+	* @param donnees sauvegarde 
+	* @param mines nombre de mines
+	* @param fenetre fenetre de Jeu
+	* @param menu fenetre du menu rattaché 
+	*/
 	public Grille (int lignes,int colonnes,SaveManager.SaveData donnees,int mines,FrameJeu fenetre, FrameMenu menu){
 		super();
 		this.colonnes=colonnes;
@@ -137,7 +188,10 @@ public class Grille extends JPanel{
 		this.banniere.setMinesLeft(this.minesLeft);
 	}
 
-	//	Méthode pour Génerer le plateau
+	/**
+	*Méthode pour Génerer le plateau
+	* @param caseSize taille d'une case
+	*/
 	protected void GenererPlateau(Dimension caseSize){
 		this.plateau= new Case[this.taille];
 		for (int i=0;i<this.taille;i++){
@@ -145,14 +199,19 @@ public class Grille extends JPanel{
 		}
 	}
 
-	//	Méthode pour Afficher le plateau
+	/**
+	*Méthode pour Afficher le plateau
+	*/
 	protected void AfficherPlateau(){
 		for (int i=0;i<this.taille;i++){
 			this.add(this.plateau[i]);
   		}
 	}
 
-	//	Méthode pour établir le nombre de mines autour de chaque case
+	/**
+	*Méthode pour établir le nombre de mines autour de chaque case
+	* @param caseMine tableau des cases minées
+	*/
 	protected void SetEntourage(int[] caseMine){
 		//	On cherche à connaître le nombre de mines autour de chaque case
 		for (int i=0;i<taille;i++){
@@ -226,12 +285,18 @@ public class Grille extends JPanel{
 		}
 	}
 
-	//	Méthode pour obtenir la taille de la grille de jeu
+	/**
+	* Méthode pour obtenir la taille de la grille de jeu
+	* @return grilleSize 
+	*/
     public Dimension getGrilleSize(){
         return grilleSize;
     }
 
-	//	Méthode pour déterminer le nombre de mines restantes
+
+	/**
+	*Méthode déterminant le nombre de mines restantes
+	*/
 	public void MinesLeft(){
 		this.minesLeft=this.mines;
 		for (int i=0;i<this.taille;i++){
@@ -242,7 +307,9 @@ public class Grille extends JPanel{
 		this.banniere.setMinesLeft(this.minesLeft);
 	}
 
-	// 	Méthode déterminant les conditions de victoire
+	/**
+	*Méthode déterminant les conditions de victoire
+	*/ 
 	public void verifVictoire(){
 		// 	Compte le nombre de cases visibles
 		int casesVisibles=0;
@@ -260,7 +327,9 @@ public class Grille extends JPanel{
 		}
 	}
 
-	//	Méthode montrer la défaite
+	/**
+	*Méthode pour montrer la défaite
+	*/ 
 	public void Defaite(){
 		//	Montre toutes les cases du plateau
 		for (int i=0;i<this.taille;i++){
@@ -269,23 +338,35 @@ public class Grille extends JPanel{
 		this.banniere.setDefaite();
 		}
 
-	//	Methode pour récupérer le plateau de jeu
+	/**
+	* Methode pour récupérer le plateau de jeu
+	* @return copie du tableau de cases
+	*/
 	public Case[] getPlateau(){
 		return Arrays.copyOf(this.plateau,this.taille);
 	}
 
-	//	Méthode pour récupérer la taille de la grille
+	/**
+	*Méthode pour récupérer la taille de la grille
+	* @return la taille de la grille
+	*/
 	public Dimension getDimensionGrille(){
 		Dimension grilleSize= new Dimension(this.colonnes, this.lignes);
 		return grilleSize;
 	}
 
-	//	Méthode pour savoir combien de mines sont dans la grille
+	/**
+	*Méthode pour savoir combien de mines sont dans la grille
+	* @return this.mines le nombre de mines
+	*/
 	public int getMines(){
 		return this.mines;
 	}
 
-	//	Méthode pour rendre visibles les cases autour d'un 0
+	/**
+	*Méthode pour rendre visibles les cases autour d'un 0
+	* @param panel case autour de laquelle il faut révéler les cases
+	*/
 	public void setEntourageVisible(Case panel){
 		for(int i=0; i<this.taille;i++){
 			if (plateau[i]==panel){
@@ -341,15 +422,26 @@ public class Grille extends JPanel{
 		}
 	}
 
-	//	Méthode qui renvoie la banniere d'état de la partie
+	/**
+	*Méthode qui renvoie la banniere d'état de la partie
+	* @return this.banniere
+	*/
 	public Banniere getBanniere(){
 		return this.banniere;
 	}
-	//	Méthode qui défini si la partie est en cours ou non 
+
+	/**
+	*Méthode qui défini si la partie est en cours ou non
+	* @param enJeu statut de la partie
+	*/
 	public void setEnJeu(boolean enJeu){
 		this.enJeu=enJeu;
 	}
-	//	Méthode qui renvoie si la partie est en cours ou non 
+
+	/**
+	*Méthode qui renvoie si la partie est en cours ou non 
+	* @return statut enjeu
+	*/
 	public boolean getEnJeu(){
 		return this.enJeu;
 	}

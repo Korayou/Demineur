@@ -6,6 +6,7 @@
 public class Main{
         /**
         * main ouvrant la fenêtre de menu
+        * @param args arguments au lancement du programme
         */
 	public static void main(String[] args) {
         new FrameMenu();    

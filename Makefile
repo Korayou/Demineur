@@ -20,14 +20,17 @@ SettingsListener.class : SettingsListener.java
 NewGameListener.class : NewGameListener.java FrameJeu.class 
 	${JC} ${JCFLAGS} NewGameListener.java
 
-Chargement.class : Chargement.java FrameJeu.class
+Chargement.class : Chargement.java FrameJeu.class SaveManager.class
 	${JC} ${JCFLAGS} Chargement.java
 
-FrameJeu.class : FrameJeu.java Grille.class
+FrameJeu.class : FrameJeu.java Grille.class SaveAndCloseListener.class
 	${JC} ${JCFLAGS} FrameJeu.java
 
 Grille.class : Grille.java Banniere.class Case.class
 	${JC} ${JCFLAGS} Grille.java
+
+SaveAndCloseListener.class : SaveAndCloseListener.java SaveManager.class
+	${JC} ${JCFLAGS} SaveAndCloseListener.java
 
 Banniere.class : Banniere.java MenuListener.class SaveListener.class
 	${JC} ${JCFLAGS} Banniere.java

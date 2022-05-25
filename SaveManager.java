@@ -36,7 +36,8 @@ public class SaveManager {
 
     /**
     * Méthode qui charge les infos de sauvegarde 
-    * @param nomFicher le nom du fichier de save
+    * @param nomFichier le nom du fichier de save
+    * @return sauvegarde
     */
     public SaveData load(String nomFichier) {
         String toReturn="";

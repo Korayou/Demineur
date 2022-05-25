@@ -1,10 +1,22 @@
 import java.awt.event.*;
-
+/**
+* La classe <code>ListenerCase</code> implémente l'interface MouseListener
+* Elle permet de recharger la case cliquée avec les modifications apportées par l'utilisateur
+*  
+* @version 1.1
+* @author Kayyissa Haïssous
+*/
 public class ListenerCase implements MouseListener {
+	/**
+ 	* nombre représentant le marquage sur la case
+ 	*/
 	private int marquage = 0;
 
 	@Override
-	// Méthode qui va servir à détecter le click de la souris
+	/**
+ 	* Méthode à écrire qui réagit au click de la souris
+ 	* @param evenement L'évenement de la souris
+ 	*/
 	public void mouseClicked(MouseEvent evenement) {
 		Case panel = (Case) evenement.getSource();
 		if (panel.getEnJeu()) {
@@ -38,16 +50,28 @@ public class ListenerCase implements MouseListener {
 		}
 	}
 
-	// Les autres méthodes de l'interface n'interviennent pas
+	/**
+ 	* Méthode à écrire qui n'intervient pas 
+ 	* @param evenement L'évenement de la souris
+ 	*/
 	public void mouseEntered(MouseEvent evenement) {
 	}
-
+	/**
+ 	* Méthode à écrire qui n'intervient pas 
+ 	* @param evenement L'évenement de la souris
+ 	*/
 	public void mouseExited(MouseEvent evenement) {
 	}
-
+	/**
+ 	* Méthode à écrire qui n'intervient pas 
+ 	* @param evenement L'évenement de la souris
+ 	*/
 	public void mousePressed(MouseEvent evenement) {
 	}
-
+	/**
+ 	* Méthode à écrire qui n'intervient pas 
+ 	* @param evenement L'évenement de la souris
+ 	*/
 	public void mouseReleased(MouseEvent evenement) {
 	}
 

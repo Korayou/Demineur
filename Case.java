@@ -1,15 +1,38 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+* La classe <code>Case</code> genère une case de jeu
+* @version 1.1
+* @author Kayyissa Haïssous
+*/
 public class Case extends JPanel {
-	//	Definition d'attributs
+	/**
+	* grille sur laquelle est la cas
+	*/
 	private Grille grille;
+	/**
+	* nombre de mines alentours
+	*/
 	private int entourage;
+	/**
+	* statut si la case est visible ou non
+	*/
 	private boolean visible;
+	/**
+	* si la case est minée ou non
+	*/
 	private boolean minee;
+	/**
+	* si la case est marquée par l'utilisateur ou non
+	*/
 	private boolean reperee;
 
-	//	Définition du constructeur
+	/**
+	* Définition du constructeur qui genère une case
+	* @param grille grille de jeu
+	* @param caseSize taille d'une case
+	*/
 	public Case(Grille grille, Dimension caseSize) {
 		super();
 		//	Initialisation des attributs 
@@ -27,7 +50,9 @@ public class Case extends JPanel {
 		this.setBackground(new Color(70, 70, 70));
 	}
 
-	//	Méthode qui permet de montrer la case, et fait perdre si elle est minée
+	/**
+	* Méthode qui permet de montrer la case, et fait perdre si elle est minée
+	*/
 	public void setVisible(){
 		// On vérfie que la case n'est pas déjà visible
 		if (!this.visible){
@@ -66,37 +91,58 @@ public class Case extends JPanel {
 		}
 	}
 
-	//	Méthode permettant de dire si la case est cachée ou visible
+	/**
+	* Méthode permettant de dire si la case est cachée ou visible
+	* @return this.visible 
+	*/
 	public boolean getVisible(){
 		return this.visible;
 	}
 
-	//	Méthode pour déclarer la présence d'une mine sur une case
+	/**
+	* Méthode pour déclarer la présence d'une mine sur une case
+	*/
 	public void setMine(){
 		this.minee=true;
 	}
 
-	// Permet de dire si une case est minée
+	/**
+	* Permet de dire si une case est minée
+	* @return this.minee
+	*/
 	public boolean getMine(){
 		return this.minee;
 	}
 
-	//	Défini combien de mines entourent la case
+	/**
+	*Défini combien de mines entourent la case
+	* @param entourage mines autour de la case
+	*/
 	public void setEntourage(int entourage){
 		this.entourage=entourage;
 	}
 
-	//	Renvoi l'entourage de la case 
+	/**
+	*Renvoie l'entourage de la case 
+	* @return this.entourage
+	*/
 	public int getEntourage(){
 		return this.entourage;
 	}
 
-	//	Permet d'acceder à la grille sur laquelle est la case
+	/**
+	* Permet d'acceder à la grille sur laquelle est la case
+	* @return this.grille
+	*/
 	public Grille getGrille(){
 		return this.grille;
 	}
 
-	//	Méthode pour savoir si le joueur pense que la case est minée
+	/**
+	* Méthode pour savoir si le joueur pense que la case est minée
+	* @param reperee si la case est marquée ou non
+	* @param marquage quel est le marquage sur la case (0 si aucun)
+	*/
 	public void setReperee(boolean reperee, int marquage){
 		this.reperee=reperee;
 		if (marquage==1){
@@ -108,12 +154,17 @@ public class Case extends JPanel {
 		this.grille.MinesLeft();
 	}
 
-	//	Methode pour dire si la case est marquée ou non
+	/**
+	* Methode pour dire si la case est marquée ou non
+	* @return this.reperee
+	*/
 	public boolean getReperee(){
 		return this.reperee;
 	}
 
-	//	Methode pour montrer que la partie est gagnée
+	/**
+	* Methode pour montrer que la partie est gagnée
+	*/
 	public void setVictoire(){
 		this.grille.setEnJeu(false);
 		if (this.minee==true){
@@ -123,11 +174,17 @@ public class Case extends JPanel {
 		}
 	}
 
-	//	Methode pour savoir dans le Listener si la partie est finie ou non 
+	/**
+	* Methode pour savoir si la partie est finie ou non
+	* @return this.grille.getEnJeu()
+	*/ 
 	public boolean getEnJeu(){
 		return this.grille.getEnJeu();
 	}
 
+	/**
+	* redéfinition du toString pour sauvegarder les cases
+	*/ 
 	@Override
 	public String toString(){
     	int value=0;
