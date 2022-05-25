@@ -1,5 +1,4 @@
 import java.awt.event.*;
-import java.awt.*;
 
 public class ListenerCase implements MouseListener {
 	private int marquage = 0;
@@ -17,20 +16,19 @@ public class ListenerCase implements MouseListener {
 			if ((evenement.getButton() == MouseEvent.BUTTON3) && (panel.getVisible() == false)) {
 				// Au premier click, on place une étoile pour indiquer la présence d'une mine
 				if (this.marquage == 0) {
-					panel.add(new Etoile(panel.getSize()), BorderLayout.CENTER);
-					panel.setReperee(true);
+					panel.setReperee(true,1);
 					this.marquage = 1;
 				}
 				// Au second, on met un point d'interrogation en cas de soupçon pour aider à la
 				// réflexion
 				else if (this.marquage == 1) {
 					panel.removeAll();
-					panel.add(new Doute(panel.getSize()), BorderLayout.CENTER);
+					panel.setReperee(true, 2);
 					this.marquage = 2;
 				}
 				// Au troisième click on efface tout marquage
 				else if (this.marquage == 2) {
-					panel.setReperee(false);
+					panel.setReperee(false,0);
 					panel.removeAll();
 					this.marquage = 0;
 				}

@@ -72,7 +72,7 @@ public class Grille extends JPanel{
 		//	On place les cases à leur état actuel dans la grille
 		AfficherPlateau();
 
-		//	On
+		//	On initialise le compteur de mines restantes 
 		this.banniere.setMinesLeft(this.minesLeft);
     }
 
@@ -82,6 +82,7 @@ public class Grille extends JPanel{
 		this.colonnes=colonnes;
 		this.lignes=lignes;
 		this.taille=lignes*colonnes;
+		this.mines=mines;
 		this.minesLeft=mines;
 		this.enJeu=true;
 		this.fenetre=fenetre;
@@ -104,20 +105,17 @@ public class Grille extends JPanel{
 		int j=0;
 		//	On lit maintenant les données pour fixer certains attributs et savoir où sont les mines
 		for (int i=0;i<=taille-1;i++){
-			System.out.println(donnees.cases.substring(i,i+1));
 			if (Integer.parseInt(donnees.cases.substring(i,i+1))==1){
 				plateau[i].setMine();
 				caseMine[j]=i;
-				System.out.println(caseMine[j]);
 				j++;
 			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==2){
-				plateau[i].setReperee(true);
+				plateau[i].setReperee(true,1);
 			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==3){
 				plateau[i].setMine();
 				caseMine[j]=i;
-				System.out.println(caseMine[j]);
 				j++;
-				plateau[i].setReperee(true);
+				plateau[i].setReperee(true,1);
 			}
 		}
 		
@@ -134,11 +132,10 @@ public class Grille extends JPanel{
 
 		//	On affiche la grille
 		AfficherPlateau();
+
+		//	On initialise le compteur de mines restantes 
+		this.banniere.setMinesLeft(this.minesLeft);
 	}
-
-
-
-
 
 	//	Méthode pour Génerer le plateau
 	protected void GenererPlateau(Dimension caseSize){
@@ -226,7 +223,6 @@ public class Grille extends JPanel{
 				}
 			}
 			plateau[i].setEntourage(entourage);
-			System.out.println(entourage);
 		}
 	}
 

@@ -97,8 +97,14 @@ public class Case extends JPanel {
 	}
 
 	//	Méthode pour savoir si le joueur pense que la case est minée
-	public void setReperee(boolean reperee){
+	public void setReperee(boolean reperee, int marquage){
 		this.reperee=reperee;
+		if (marquage==1){
+			this.add(new Etoile(this.getSize()), BorderLayout.CENTER);
+		}
+		if (marquage==2){
+			this.add(new Doute(this.getSize()), BorderLayout.CENTER);
+		}
 		this.grille.MinesLeft();
 	}
 
