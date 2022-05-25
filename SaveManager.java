@@ -1,8 +1,19 @@
 import java.awt.Dimension;
 import java.io.*;
 
+/**
+ * La classe <code>SaveManager</code> sert à sauvegarder la partie en cours
+ *  
+ * @version 1.1
+ * @author Kayyissa Haïssous
+ */
 public class SaveManager {
-    
+
+    /**
+    * Méthode pour récupérer les infos et les écrires dans le fichier voulu
+    * @param grille la grille de jeu
+    * @param nomFichier le nom du fichier de sauvegarde
+    */
     public void save(Grille grille, String nomFichier) {
         Dimension taille = grille.getDimensionGrille();
 
@@ -23,6 +34,10 @@ public class SaveManager {
         }
     }
 
+    /**
+    * Méthode qui charge les infos de sauvegarde 
+    * @param nomFicher le nom du fichier de save
+    */
     public SaveData load(String nomFichier) {
         String toReturn="";
         String ligne;
@@ -61,6 +76,9 @@ public class SaveManager {
         return toRet;
     }
 
+    /**
+    * La classe <code>SaveDate</code> correspond aux données de sauvegarde d'une partie
+    */
     public class SaveData{
         public Dimension taille;
         public String cases;

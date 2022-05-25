@@ -29,7 +29,6 @@ public class Case extends JPanel {
 
 	//	Méthode qui permet de montrer la case, et fait perdre si elle est minée
 	public void setVisible(){
-
 		// On vérfie que la case n'est pas déjà visible
 		if (!this.visible){
 			this.visible = true;

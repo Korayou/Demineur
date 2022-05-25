@@ -2,20 +2,57 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.awt.*;
-
-// Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
+/**
+ * La classe <code>FrameMenu</code> correspond à une fenêtre de menu,
+ * elle l'affiche et régit aux directives de l'utilisateur (Jouer, Charger, Quitter)
+ * @version 1.1
+ * @author Kayyissa Haïssous
+ */
 public class FrameMenu extends JFrame{
+	/**
+   	* Nombre de lignes pour la partie à lancer
+	*/
 	private int lignes;
+	/**
+   	* Nombre de colonnes pour la partie à lancer
+	*/
 	private int colonnes;
+	/**
+   	* Nombre de mines pour la partie à lancer
+	*/
 	private int mines;
+	/**
+   	* JSlider qui permet de choisir le nombre de lignes
+	*/
 	private JSlider sliderLignes;
+	/**
+   	* JSlider qui permet de choisir le nombre de colonnes
+	*/
 	private JSlider sliderColonnes;
+	/**
+   	* JSlider qui permet de choisir le nombre de mines
+	*/
 	private JSlider sliderMines;
+	/**
+   	* JLabel qui permet d'afficher en temps réel le nombre de lignes
+	*/
 	private JLabel showLines;
+	/**
+   	* JLabel qui permet d'afficher en temps réel le nombre de colonnes
+	*/
 	private JLabel showColumns;
+	/**
+   	* JLabel qui permet d'afficher en temps réel le nombre de mines
+	*/
 	private JLabel showMines;
+	/**
+   	* JButton pour charger une éventuelle sauvegarde
+	*/
 	private JButton charger;
 
+	/**
+    * Constructeur destiné à la création et l'affichage de la fenêtre de menu
+	*/
 	public FrameMenu() {
 		super();
 
@@ -37,7 +74,7 @@ public class FrameMenu extends JFrame{
 		titre.setBounds((frameSize.width/3), frameSize.height/15,frameSize.width/2,frameSize.height*2/15);
 		this.add(titre);
 		
-		//	On créer les sliders et les JLabel qui afficheront leur valeur
+		//	On créer les Jsliders et les JLabel qui afficheront leur valeur
 		this.sliderLignes = new JSlider(4,30,20);
 		this.sliderColonnes = new JSlider(4,30,25);
 		this.sliderMines = new JSlider(1,900, 50);
@@ -70,6 +107,7 @@ public class FrameMenu extends JFrame{
 		this.add(showColumns);
 		this.add(showMines);
 		
+		//	On créer les boutons Jouer, quitter et si une save existe, charger
 		JButton newGame = new JButton("Jouer");
 		newGame.addActionListener(new NewGameListener(this));
 
@@ -77,7 +115,7 @@ public class FrameMenu extends JFrame{
 		this.add(newGame);
 
 		JButton exit = new JButton("Quitter");
-		exit.addActionListener(new ActionListener(){
+		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
@@ -98,8 +136,12 @@ public class FrameMenu extends JFrame{
 	    this.setVisible(true);
 	}
 
-	//	Méthode pour récupérer les valeurs des paramètres et les afficher à l'écran
-	public void setSettings(int settingToSet, int settingValue){
+	/**
+    * Méthode pour récupérer les valeurs des paramètres et les afficher à l'écran
+	* @param settingToSet Le paramètre qui doit être changé
+	* @param settingValue La nouvelle valeur à donner au paramètre
+    */
+	public void setSettings(int settingToSet, int settingValue) {
 		if (settingToSet==0){
 			this.lignes=settingValue;
 			showLines.setText("Lignes : "+settingValue);
@@ -113,8 +155,11 @@ public class FrameMenu extends JFrame{
 		this.sliderMines.setMaximum(this.colonnes*this.lignes);
     }
 
-	// 	Methode pour connaître les paramètres de la partie
-	public int[] getSettings(){
+	/**
+	* Renvoie les valeurs des paramètres
+   	* @return les paramètres pour une nouvelle partie
+    */
+	public int[] getSettings() {
 		int[] settings = new int[3];
 		settings[0]=this.lignes;
 		settings[1]=this.colonnes;
@@ -122,8 +167,10 @@ public class FrameMenu extends JFrame{
 		return settings;
 	}
 
-	//	Methode pour supprimer le bouton charger après un chargement
-	public void deleteCharger(){
+	/**
+    * Méthode pour supprimer le bouton charger après avoir chargé une partie
+    */
+	public void deleteCharger() {
 		this.remove(this.charger);
 	}
 }

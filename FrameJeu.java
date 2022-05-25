@@ -1,10 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
 
-// Cette classe à pour but d'afficher un menu et de réagir aux directives de l'utilisateur (lancer le jeu, le quitter...)
+/**
+ * La classe <code>FrameJeu</code> génère une grille de jeu
+ *  
+ * @version 1.1
+ * @author Kayyissa Haïssous
+ */
 public class FrameJeu extends JFrame{
+	/**
+    * grille de jeu
+    */
 	private Grille grille;
 
+	/**
+    * Constructeur qui sert à géréner une nouvelle grille
+    * @param lignes le nombre de lignes
+	* @param colonnes le nombre de colonnes
+	* @param mines le nombre de mines
+	* @param menu la fenêtre du menu rattaché à la partie
+    */
 	public FrameJeu(int lignes, int colonnes, int mines, FrameMenu menu) {
 		super();
 		//	Création d'une grille pour une nouvelle partie
@@ -13,13 +28,24 @@ public class FrameJeu extends JFrame{
 
 	}
 
-	//	Génération d'une grille à partir de la sauvegarde
+	/**
+    * Constructeur qui sert à charger la grille d'une ancienne partie
+    * @param lignes le nombre de lignes
+	* @param colonnes le nombre de colonnes
+	* @param donnees la sauvegarde
+	* @param mines le nombre de mines
+	* @param menu la fenêtre du menu rattaché à la partie
+    */
 	public FrameJeu (int lignes, int colonnes, SaveManager.SaveData donnees, int mines, FrameMenu menu){
 		super();
+		//	Génération d'une grille à partir de la sauvegarde
 		this.grille=new Grille(lignes,colonnes,donnees,mines,this, menu);
 		MiseEnPage();
 	}
 
+	/**
+    * Méthode qui sert à créer la fenêtre avec ses élements
+    */
 	public void MiseEnPage(){
 		
 		// On récupère les dimensions de l'écran pour adapter la taille par défaut de notre fenêtre

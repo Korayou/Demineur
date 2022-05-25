@@ -15,8 +15,6 @@ public class Grille extends JPanel{
 	private boolean enJeu;
 	private FrameJeu fenetre;
 
-	// TODO : Recréer un tableau avec les cases minees
-
     // Définition du constructeur qui correspond à une nouvelle grille de jeu
     public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre, FrameMenu menu){
 		super();
@@ -85,7 +83,6 @@ public class Grille extends JPanel{
 		this.lignes=lignes;
 		this.taille=lignes*colonnes;
 		this.minesLeft=mines;
-		this.mines=mines;
 		this.enJeu=true;
 		this.fenetre=fenetre;
 
@@ -102,49 +99,42 @@ public class Grille extends JPanel{
 		//	On initialise un plateau de cases
 		GenererPlateau(caseSize);
 
-		
-		//	On prépare un tableau pour y placer les cases minées
+		//	On créer un tableau pour y placer les cases minées
 		int[] caseMine = new int[mines];
-
-
-		//	On lit maintenant les données pour fixer certains de leurs attributs
 		int j=0;
+		//	On lit maintenant les données pour fixer certains attributs et savoir où sont les mines
 		for (int i=0;i<=taille-1;i++){
 			System.out.println(donnees.cases.substring(i,i+1));
 			if (Integer.parseInt(donnees.cases.substring(i,i+1))==1){
 				plateau[i].setMine();
 				caseMine[j]=i;
+				System.out.println(caseMine[j]);
 				j++;
 			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==2){
 				plateau[i].setReperee(true);
 			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==3){
 				plateau[i].setMine();
+				caseMine[j]=i;
+				System.out.println(caseMine[j]);
+				j++;
 				plateau[i].setReperee(true);
-			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==4){
-				plateau[i].setVisible();
 			}
 		}
-
-
-
+		
 		//	On détermine l'entourage de chaque case
 		SetEntourage(caseMine);
+		
+
+		//	On affiche les cases qui doivent être visibles
+		for (int n=0;n<=taille-1;n++){
+			if (Integer.parseInt(donnees.cases.substring(n,n+1))==4){
+				plateau[n].setVisible();
+			}
+		}
 
 		//	On affiche la grille
 		AfficherPlateau();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -236,6 +226,7 @@ public class Grille extends JPanel{
 				}
 			}
 			plateau[i].setEntourage(entourage);
+			System.out.println(entourage);
 		}
 	}
 

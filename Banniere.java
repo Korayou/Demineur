@@ -1,12 +1,37 @@
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * La classe <code>Banniere</code> affiche l'état de la partie,
+ * gère la sauvegarde la victoire et la défaite
+ *  
+ * @version 1.1
+ * @author Kayyissa Haïssous
+ */
 public class Banniere extends JPanel {
+	/**
+    * fenetre de Jeu
+    */
 	private FrameJeu fenetre;
+	/**
+    * fenetre du menu lié
+    */
 	private FrameMenu menu;
+	/**
+    * Bouton qui permet de sauver et quitter
+    */
 	private JButton save;
+	/**
+    * le JLabel qui affiche le nombre de mines restantes
+    */
 	private JLabel mines;
-	//	Définition du constructeur
+	
+	/**
+    * Constructeur qui sert à la création de la bannière et l'ajout du bouton sauver et quitter
+    * @param mines le nombre de mines dans la partie
+	* @param fenetre la fenêtre de jeu
+	* @param menu la fenêtre de menu rattachée
+	* @param grille la grille de jeu
+    */
 	public Banniere(int mines, FrameJeu fenetre, FrameMenu menu, Grille grille) {
 		super();
 		this.fenetre=fenetre;
@@ -18,7 +43,6 @@ public class Banniere extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		//	Compteur de mines restantes
-
 		this.mines= new JLabel();
 		this.add(this.mines, BorderLayout.NORTH);
 
@@ -28,13 +52,18 @@ public class Banniere extends JPanel {
 		this.add(this.save, BorderLayout.EAST);
 	}
 
-	//	Méthode pour afficher le nombre de mines restantes
+	/**
+    * Méthode pour afficher le nombre de mines restantes
+    * @param minesLeft le nombre de mines restantes
+    */
 	public void setMinesLeft(int minesLeft) {
 		this.mines.setText("Mines restantes : "+Integer.toString(minesLeft));
 		this.repaint();
 	}
 
-	//	Méthode pour indiquer au joueur sa Victoire
+	/**
+    * Méthode pour indiquer au joueur sa Victoire
+    */
 	public void setVictoire() {
 		remove(this.save);
 		JLabel victoire = new JLabel("Victoire !   Retour au menu...");
@@ -46,7 +75,9 @@ public class Banniere extends JPanel {
 		timerMenu.start();
 	}
 
-	//	Méthode pour indiquer au joueur sa Défaite
+	/**
+    * Méthode pour indiquer au joueur sa Défaite
+    */
 	public void setDefaite() {
 		remove(this.save);
 		JLabel defaite = new JLabel("Défaite !   Retour au menu...");
