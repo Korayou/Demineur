@@ -6,7 +6,7 @@ public class SaveManager {
     public void save(Grille grille, String nomFichier) {
         Dimension taille = grille.getDimensionGrille();
 
-        String metaData= (int) taille.getWidth()+"x"+ (int) taille.getHeight()+"\n";
+        String metaData= (int) taille.getWidth()+"x"+ (int) taille.getHeight()+"x"+ grille.getMines()+"\n";
         try {
             BufferedWriter fichier = new BufferedWriter(new FileWriter(nomFichier));
             Case[] toSave = grille.getPlateau();
@@ -26,17 +26,19 @@ public class SaveManager {
     public SaveData load(String nomFichier) {
         String toReturn="";
         String ligne;
+        int mines=0;
         Dimension dimension=new Dimension(0,0);
-        SaveData toRet=new SaveData(null, null);
+        SaveData toRet=new SaveData(null, null, 0);
 
         try {
             BufferedReader fichier = new BufferedReader(new FileReader(nomFichier));
 
             ligne=fichier.readLine();
-            String[] taille = ligne.split("x");
+            String[] infos = ligne.split("x");
 
-            int largeur = Integer.parseInt(taille[0]);
-            int hauteur = Integer.parseInt(taille[1]);
+            int largeur = Integer.parseInt(infos[0]);
+            int hauteur = Integer.parseInt(infos[1]);
+            mines = Integer.parseInt(infos[2]);
 
             dimension = new Dimension(largeur, hauteur);
 
@@ -48,26 +50,29 @@ public class SaveManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        toRet.cases=toReturn;
+        toRet.taille=dimension;
+        toRet.mines=mines;
 
         File save = new File(nomFichier);
         save.delete();
 
-        toRet.cases=toReturn;
-        toRet.taille=dimension;
         return toRet;
     }
 
     public class SaveData{
         public Dimension taille;
         public String cases;
+        public int mines;
 
-        public SaveData(Dimension taille, String cases) {
+        public SaveData(Dimension taille, String cases, int mines) {
             this.taille = taille;
             this.cases = cases;
         }
 
         public String toString() {
-            return (int) taille.getWidth()+"x"+(int) taille.getHeight()+"\n"+cases;
+            return (int) taille.getWidth()+"x"+(int) taille.getHeight()+"x"+mines+"\n"+cases;
         }
     }
 }

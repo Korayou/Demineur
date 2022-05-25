@@ -7,10 +7,12 @@ public class Chargement implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.menu.dispose();
+        this.menu.setVisible(false);
+        this.menu.deleteCharger();
         SaveManager saveManager = new SaveManager();
         SaveManager.SaveData donnees = saveManager.load("Save.txt");
-        System.out.println(donnees);
+
+        new FrameJeu((int) donnees.taille.getHeight(),(int) donnees.taille.getWidth(), donnees,(int) donnees.mines, this.menu);
     }
     
 }

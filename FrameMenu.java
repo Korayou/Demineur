@@ -14,6 +14,7 @@ public class FrameMenu extends JFrame{
 	private JLabel showLines;
 	private JLabel showColumns;
 	private JLabel showMines;
+	private JButton charger;
 
 	public FrameMenu() {
 		super();
@@ -87,7 +88,7 @@ public class FrameMenu extends JFrame{
 		
 		File save = new File("Save.txt");
 		if(save.exists()){
-			JButton charger = new JButton("Charger");
+			charger = new JButton("Charger");
 			charger.addActionListener(new Chargement(this));
 			charger.setBounds(frameSize.width*4/10, frameSize.height*12/15, frameSize.width/5, frameSize.height/15);
 			this.add(charger);
@@ -119,5 +120,10 @@ public class FrameMenu extends JFrame{
 		settings[1]=this.colonnes;
 		settings[2]=this.mines;
 		return settings;
+	}
+
+	//	Methode pour supprimer le bouton charger après un chargement
+	public void deleteCharger(){
+		this.remove(this.charger);
 	}
 }

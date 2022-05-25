@@ -15,10 +15,9 @@ public class Grille extends JPanel{
 	private boolean enJeu;
 	private FrameJeu fenetre;
 
-	// TODO : entourage dans une méthode
 	// TODO : Recréer un tableau avec les cases minees
 
-    // Définition du constructeur qui correspond à une grille de jeu
+    // Définition du constructeur qui correspond à une nouvelle grille de jeu
     public Grille(int lignes, int colonnes, int mines, FrameJeu fenetre, FrameMenu menu){
 		super();
 		this.colonnes=colonnes;
@@ -28,6 +27,7 @@ public class Grille extends JPanel{
 		this.minesLeft=mines;
 		this.enJeu=true;
 		this.fenetre=fenetre;
+
 		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
@@ -68,6 +68,105 @@ public class Grille extends JPanel{
 			}
 		}
 
+		//	On défini l'entourage de chaque case
+		SetEntourage(caseMine);
+
+		//	On place les cases à leur état actuel dans la grille
+		AfficherPlateau();
+
+		//	On
+		this.banniere.setMinesLeft(this.minesLeft);
+    }
+
+
+	public Grille (int lignes,int colonnes,SaveManager.SaveData donnees,int mines,FrameJeu fenetre, FrameMenu menu){
+		super();
+		this.colonnes=colonnes;
+		this.lignes=lignes;
+		this.taille=lignes*colonnes;
+		this.minesLeft=mines;
+		this.mines=mines;
+		this.enJeu=true;
+		this.fenetre=fenetre;
+
+		// Découpage de l'espace en fonction des paramètres pour la mise en place de la grille
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	    this.grilleSize = new Dimension(((screenSize.height*3/4)/lignes)*colonnes, screenSize.height*3/4 );
+		Dimension caseSize = new Dimension(this.grilleSize.height/lignes,this.grilleSize.height/lignes);
+	    GridLayout damier = new GridLayout(lignes,colonnes);
+		Banniere banniere = new Banniere(mines,this.fenetre, menu, this);
+		this.banniere=banniere;
+		this.setLayout(damier);
+        this.setSize(grilleSize);
+
+		//	On initialise un plateau de cases
+		GenererPlateau(caseSize);
+
+		
+		//	On prépare un tableau pour y placer les cases minées
+		int[] caseMine = new int[mines];
+
+
+		//	On lit maintenant les données pour fixer certains de leurs attributs
+		int j=0;
+		for (int i=0;i<=taille-1;i++){
+			System.out.println(donnees.cases.substring(i,i+1));
+			if (Integer.parseInt(donnees.cases.substring(i,i+1))==1){
+				plateau[i].setMine();
+				caseMine[j]=i;
+				j++;
+			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==2){
+				plateau[i].setReperee(true);
+			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==3){
+				plateau[i].setMine();
+				plateau[i].setReperee(true);
+			} else if (Integer.parseInt(donnees.cases.substring(i,i+1))==4){
+				plateau[i].setVisible();
+			}
+		}
+
+
+
+		//	On détermine l'entourage de chaque case
+		SetEntourage(caseMine);
+
+		//	On affiche la grille
+		AfficherPlateau();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//	Méthode pour Génerer le plateau
+	protected void GenererPlateau(Dimension caseSize){
+		this.plateau= new Case[this.taille];
+		for (int i=0;i<this.taille;i++){
+			this.plateau[i]= new Case(this,caseSize);
+		}
+	}
+
+	//	Méthode pour Afficher le plateau
+	protected void AfficherPlateau(){
+		for (int i=0;i<this.taille;i++){
+			this.add(this.plateau[i]);
+  		}
+	}
+
+	//	Méthode pour établir le nombre de mines autour de chaque case
+	protected void SetEntourage(int[] caseMine){
 		//	On cherche à connaître le nombre de mines autour de chaque case
 		for (int i=0;i<taille;i++){
 			int entourage = 0;
@@ -138,26 +237,6 @@ public class Grille extends JPanel{
 			}
 			plateau[i].setEntourage(entourage);
 		}
-
-
-		//	On place les cases à leur état actuel dans la grille
-		AfficherPlateau();
-		this.banniere.setMinesLeft(this.minesLeft);
-    }
-
-	//	Méthode pour Génerer le plateau
-	protected void GenererPlateau(Dimension caseSize){
-		this.plateau= new Case[this.taille];
-		for (int i=0;i<this.taille;i++){
-			this.plateau[i]= new Case(this,caseSize);
-		}
-	}
-
-	//	Méthode pour Afficher le plateau
-	protected void AfficherPlateau(){
-		for (int i=0;i<this.taille;i++){
-			this.add(this.plateau[i]);
-  		}
 	}
 
 	//	Méthode pour obtenir la taille de la grille de jeu
@@ -208,10 +287,15 @@ public class Grille extends JPanel{
 		return Arrays.copyOf(this.plateau,this.taille);
 	}
 
-	//	Méthode pour récupérer le nombre de lignes
+	//	Méthode pour récupérer la taille de la grille
 	public Dimension getDimensionGrille(){
 		Dimension grilleSize= new Dimension(this.colonnes, this.lignes);
 		return grilleSize;
+	}
+
+	//	Méthode pour savoir combien de mines sont dans la grille
+	public int getMines(){
+		return this.mines;
 	}
 
 	//	Méthode pour rendre visibles les cases autour d'un 0
